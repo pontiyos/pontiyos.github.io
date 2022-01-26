@@ -1,0 +1,48 @@
+@import 'nav.css';
+@import 'contact.css';
+@import 'stuff.css';
+
+body, html {
+    height: 100%;
+}
+
+  
+.bg {
+/* The image used */
+    background-image: url("\\img\\background_test.JPG");
+    display: flex;
+  
+/* Full height */
+    height: 100%;
+  
+/* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.intro-box{
+    background-color: #290a28;
+    opacity: 0.7;
+    justify-content: center;
+    height: -webkit-fill-available;
+    display:inline-flex;
+    height:auto;
+    color: blanchedalmond;
+}
+
+.intro-header, .intro-txt{
+    color: blanchedalmond;
+}
+
+@media only screen and (min-width: 550px) {
+    .intro-box{
+        width: 24%;
+    }
+  }
