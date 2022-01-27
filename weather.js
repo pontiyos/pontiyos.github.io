@@ -89,8 +89,9 @@ function weatherInfo (myJSON){
 }
 
 function visualWeather (code){
-    let basePath = "\\weather_png\\";
-    let imgPath = basePath + code + ".png";
+    //let basePath = "\\weather_png\\";
+    //let imgPath = basePath + code + ".png";
+    let imgPath =  code + ".png";
 
     return imgPath;
 }
