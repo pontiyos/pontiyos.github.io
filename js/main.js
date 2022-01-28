@@ -1,5 +1,3 @@
-
-
 // Modal Image Gallery
 function enlargeImg(element) {
   console.log(element);
