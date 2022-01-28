@@ -1,4 +1,5 @@
 getLocation();
+var userLocation = "";
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -13,12 +14,16 @@ function showPosition(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
-    displayLocation(lat,lon);
+    displayLocation(lat,lon, function(){
+        var resp = JSON.parse(this.responseText);
+        userLocation = resp.address.city;
+        getWeather(lat,lon);
+    });
    
-    getWeather(lat,lon);
 }
 function getWeather (lat,lon){
-    let apiBaseUrl = 'https://api.met.no/weatherapi/locationforecast/2.0/complete?';
+    //let apiBaseUrl = 'https://api.met.no/weatherapi/locationforecast/2.0/complete?';
+    let apiBaseUrl = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?';
     let apiUrl = apiBaseUrl+'lat='+lat+'&lon='+lon;
 
     let myHeaders = new Headers();
@@ -43,35 +48,37 @@ function getWeather (lat,lon){
     })
     .then(data => {
         console.log(data);
-        weatherInfo(data);
+        weatherInfo(data,userLocation);
     })
 
 }
 
-function displayLocation(latitude,longitude){
+function displayLocation(latitude,longitude,callback){
     var xttp = new XMLHttpRequest();
 
     // Paste your LocationIQ token below.
     xttp.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=" +latitude + "&lon=" + longitude + "&format=json", true);
-    xttp.send();
-    xttp.onreadystatechange = processRequest;
-    //xttp.addEventListener("readystatechange", processRequest, false);
-  
-    function processRequest(e) {
+    //xttp.send();
+    xttp.onreadystatechange = function () {
         if (xttp.readyState == 4 && xttp.status == 200) {
 
-            var response = JSON.parse(xttp.responseText);
-            console.log(response);
-            var city = response.address.city;
-            console.log(city);       
+            if (typeof callback === "function") {
+                callback.apply(xttp);
+            }
+
+        }
+        else{
+            console.log("ERROR");
         }
     }
+    xttp.send();
+
   }; 
 
-function weatherInfo (myJSON){
+function weatherInfo (myJSON,userLocation){ 
 
     let weatherHTML;
-    let myLocation = "Helsingborg";
+    let myLocation = userLocation;
 
     //Full set
     let showWeather = myJSON.properties.timeseries[0];
@@ -89,9 +96,8 @@ function weatherInfo (myJSON){
 }
 
 function visualWeather (code){
-    //let basePath = "\\weather_png\\";
-    //let imgPath = basePath + code + ".png";
-    let imgPath =  code + ".png";
+    let basePath = "\\weather_png\\";
+    let imgPath = basePath + code + ".png";
 
     return imgPath;
 }

@@ -6,61 +6,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
-body, html {
-  height: 100%;
-  color: #777;
-  line-height: 1.8;
-}
+<link rel="stylesheet" href="main.css">
 
-/* Create a Parallax Effect */
-.bgimg-1, .bgimg-2, .bgimg-3 {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* First image (Logo. Full height) */
-.bgimg-1 {
-  background-image: url('background.jpg');
-  min-height: 100%;
-}
-
-/* Second image (Portfolio) */
-.bgimg-2 {
-  background-image: url("sun.jpg");
-  min-height: 400px;
-}
-
-/* Third image (Contact) */
-.bgimg-3 {
-  background-image: url("ice.jpg");
-  min-height: 400px;
-}
-
-.weather-img{
-  width: 1.8em;
-}
-
-#main-weather{
-  float: right;
-  background-color: transparent !important;
-}
-
-.w3-wide {letter-spacing: 10px;}
-.w3-hover-opacity {cursor: pointer;}
-
-/* Turn off parallax scrolling for tablets and phones */
-@media only screen and (max-device-width: 1600px) {
-  .bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: scroll;
-    min-height: 400px;
-  }
-}
-</style>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="module" src="/weather.js"></script>
 
 <body>
@@ -73,11 +21,11 @@ body, html {
     <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
       <i class="fa fa-bars"></i>
     </a>
-    <a href="#home" class="w3-bar-item w3-button">HOME</a>
-    <a href="#certificates" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> CERTIFICATES</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
+    <a href="index.html" class="w3-bar-item w3-button">HOME</a>
+    <a href="index.html/#certificates" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> CERTIFICATES</a>
+    <a href="index.html/#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
 
-    <a id="main-weather" class="w3-bar-item w3-button"> </a>
+    <a href="weather.html" id="main-weather" class="w3-bar-item w3-button"> </a>
 
   </div>
 
@@ -112,11 +60,11 @@ body, html {
   <div class="w3-row-padding w3-center">
     
     <div class="w3-col m6">
-      <img src="acc_developer_cert.png" style="width:100%" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
+      <img src="acc_developer_cert.png" style="width:100%; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
     </div>
 
     <div class="w3-col m6">
-      <img src="smc_fundamentals_cert.png" style="width:100%" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Selligent Fundamentals certificate">
+      <img src="smc_fundamentals_cert.png" style="width:100%; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Selligent Fundamentals certificate">
     </div>
 
 
@@ -138,7 +86,7 @@ body, html {
   <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
   <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
     <img id="img02" class="w3-image">
-    <p id="caption" class="w3-opacity w3-large">Thank you for the email. This window will close shortly.</p>
+    <p id="caption" class="w3-opacity-min w3-large">Thank you for the email. This window will close shortly.</p>
   </div>
 </div>
 
@@ -189,72 +137,7 @@ body, html {
   </div>
   </footer>
  
-<script>
-// Modal Image Gallery
-function enlargeImg(element) {
-  console.log(element);
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
 
-// Change style of navbar on scroll
-window.onscroll = function() {myFunction()};
-function myFunction() {
-    var navbar = document.getElementById("myNavbar");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-    } else {
-        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
-    }
-}
-
-// Used to toggle the menu on small screens when clicking on the menu button
-function toggleFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-
-// Email confirmation
-function emailConfirmation() {
-  const element = document.createElement('img');
-  element.src = "ice.jpg";
-  document.getElementById("img02").src = element.src;
-  document.getElementById("modal02").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-
-  setTimeout(function () {document.getElementById('contactMe').reset()}, 2400); 
-
-  setTimeout(function () {document.getElementById('modal02').style.display='none'}, 5200); 
-
-}
-
-</script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-  (function() {
-  emailjs.init("user_Y4VdWqYsFJst9ipBGU1ZX");
-  })();
-
-function emailTrigger(){
-  var myForm = document.getElementById("contactMe");
-  emailjs.sendForm('service_ae8hyr6', 'template_x0t1nag',myForm).then(function(response) {
-       console.log('SUCCESS!', response.status, response.text, 'Email sent!');
-       emailConfirmation();
-    }, function(error) {
-       console.log('FAILED...', error);
-    });
-
-}
-
-</script>
 
 </body>
 </html>
