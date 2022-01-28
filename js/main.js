@@ -1,3 +1,5 @@
+
+
 // Modal Image Gallery
 function enlargeImg(element) {
   console.log(element);
@@ -28,37 +30,5 @@ function toggleFunction() {
     }
 }
 
-// Email confirmation
-function emailConfirmation() {
-  const element = document.createElement('img');
-  element.src = "confirmation.png";
-  document.getElementById("img02").src = element.src;
-  document.getElementById("modal02").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
 
-  setTimeout(function () {document.getElementById('contactMe').reset()}, 2400); 
-
-  setTimeout(function () {document.getElementById('modal02').style.display='none'}, 5200); 
-
-}
-
-
-
-
-
-  (function() {
-  emailjs.init("user_Y4VdWqYsFJst9ipBGU1ZX");
-  })();
-
-function emailTrigger(){
-  var myForm = document.getElementById("contactMe");
-  emailjs.sendForm('service_ae8hyr6', 'template_x0t1nag',myForm).then(function(response) {
-       console.log('SUCCESS!', response.status, response.text, 'Email sent!');
-       emailConfirmation();
-    }, function(error) {
-       console.log('FAILED...', error);
-    });
-
-}
 

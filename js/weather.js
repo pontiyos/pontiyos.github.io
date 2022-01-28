@@ -1,5 +1,6 @@
 getLocation();
 var userLocation = "";
+var weatherObj;
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -16,6 +17,7 @@ function showPosition(position) {
 
     displayLocation(lat,lon, function(){
         var resp = JSON.parse(this.responseText);
+        weatherObj = resp;
         userLocation = resp.address.city;
         getWeather(lat,lon);
     });

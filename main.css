@@ -16,19 +16,19 @@ body, html {
 
 /* First image (Logo. Full height) */
 .bgimg-1 {
-  background-image: url('background.jpg');
+  background-image: url('img\\background.jpg');
   min-height: 100%;
 }
 
 /* Second image (Portfolio) */
 .bgimg-2 {
-  background-image: url("sun.jpg");
+  background-image: url("img\\sun.jpg");
   min-height: 400px;
 }
 
 /* Third image (Contact) */
 .bgimg-3 {
-  background-image: url("ice.jpg");
+  background-image: url("img\\ice.jpg");
   min-height: 400px;
 }
 
@@ -53,6 +53,9 @@ body, html {
 
 #main-weather{
   float: inherit;
+}
+.select{
+  text-decoration: none;
 }
 
 }
