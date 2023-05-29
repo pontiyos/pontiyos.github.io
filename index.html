@@ -62,17 +62,17 @@
   <div class="w3-row-padding w3-center">
     
     <div class="w3-col m6">
-      <img src="cert\acc_developer_cert.png" style="width:100%; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
+      <img src="cert\acc_developer_cert.png" style=" max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
     </div>
 
     <div class="w3-col m6">
-      <img src="cert\arcdp_bp_cert.png" style="width:100%; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Real-Time CDP Business Practitioner certificate">
+      <img class="w3-auto" src="cert\arcdp_bp_cert.png" style="max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Adobe Certified Professional - Adobe Real-Time CDP Business Practitioner certificate">
     </div>    
 
     <div class="w3-row-padding w3-center"> <p class="w3-center"><em>Selligent</em></p></div>
 
-    <div class="w3-col m6" >
-      <img src="cert\smc_fundamentals_cert.png" style="width:100%; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Selligent Fundamentals certificate">
+    <div class="w3-col.l12 m6" >
+      <img class="w3-auto" src="cert\smc_fundamentals_cert.png" style="width:auto; max-height: 300px;" onclick="enlargeImg(this)" class="w3-hover-opacity" alt="Selligent Fundamentals certificate">
     </div>
     
   </div>
@@ -115,7 +115,7 @@
     </div>
     <div class="w3-col m8 w3-panel">
 
-      <p> <a style="text-decoration: none;" href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> Find me on Linkedin for easy contact  <i class="fa fa-linkedin w3-hover-opacity"></i>  </a>  or send me a message from the form below</p>
+      <p>&nbsp;<a style="text-decoration: none;" href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> Find me on Linkedin for easy contact  <i class="fa fa-linkedin w3-hover-opacity"></i>&nbsp;</a>or send me a message from the form below</p>
       
       <form id="contactMe">
         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
@@ -126,7 +126,7 @@
             <input class="w3-input w3-border" type="text" placeholder="Email" required name="from_email">
           </div>
         </div>
-        <input class="w3-input w3-border" type="text" placeholder="Message" required name="message">
+        <textarea class="w3-input w3-border" type="text" placeholder="Message" required name="message" style="resize:none"></textarea>
         <button class="w3-button w3-black w3-right w3-section" type="button" onclick="emailTrigger()">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
@@ -140,7 +140,7 @@
 <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
   <a href="index.html" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <div class="w3-xlarge w3-section">
-    %nbsp;<a href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> <i class="fa fa-linkedin w3-hover-opacity"></i> %nbsp;  </a>
+    <a href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> <i class="fa fa-linkedin w3-hover-opacity"></i> </a>
   </div>
   </footer>
  
@@ -162,12 +162,12 @@ function emailConfirmation() {
 }
 
   (function() {
-  emailjs.init("user_Y4VdWqYsFJst9ipBGU1ZX");
+    emailjs.init("E2zRm_2T5eeYwv4dS");
   })();
 
 function emailTrigger(){
   var myForm = document.getElementById("contactMe");
-  emailjs.sendForm('service_ae8hyr6', 'template_x0t1nag',myForm).then(function(response) {
+  emailjs.sendForm('service_zu6o00w', 'template_k4vuiqx',myForm).then(function(response) {
        console.log('SUCCESS!', response.status, response.text, 'Email sent!');
        emailConfirmation();
     }, function(error) {

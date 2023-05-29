@@ -70,7 +70,7 @@ function displayLocation(latitude,longitude,callback){
 
         }
         else{
-            console.log("ERROR");
+            console.log("ERROR "+ typeof callback);
         }
     }
     xttp.send();
