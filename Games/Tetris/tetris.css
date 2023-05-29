@@ -34,4 +34,21 @@
   height:auto;
   font-size: large;
 }
+@media only screen and (max-device-width: 1600px) {
+  .tetris-mobile{
+    width: 280px !important;
+    height: auto !important;
+  }
+  .game-board {
+    border: solid 2px;
+    width: 14em;
+    height: 24em;
+  }
+  .next{
+    width: 4em;
+    height:auto;
+    font-size: small;
+  }
+.tetris-info{font-size: small;}
 
+}
