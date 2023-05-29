@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="main.css">
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript" src="js\weather.js"></script>
 <script type="text/javascript" src="js\main.js"></script>
 
@@ -127,6 +128,7 @@
           </div>
         </div>
         <textarea class="w3-input w3-border" type="text" placeholder="Message" required name="message" style="resize:none"></textarea>
+        <div class="g-recaptcha" data-sitekey="6LeEtEsmAAAAAD9lXiYt4xblcH--fz0XfcmaE19R"></div>
         <button class="w3-button w3-black w3-right w3-section" type="button" onclick="emailTrigger()">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
