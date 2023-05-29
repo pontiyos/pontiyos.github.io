@@ -12,6 +12,6 @@
 
 @media only screen and (max-device-width: 1600px) {
     .mobile.weather-place{
-        style:"width:inherit;"
+        width:inherit;
     }
 }
