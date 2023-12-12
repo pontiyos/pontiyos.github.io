@@ -128,6 +128,13 @@ class Board {
       this.grid.forEach((row, y) => {
         row.forEach((value, x) => {
           if (value > 0) {
+            
+            this.ctx.moveTo(30, 0.5 + x + 30);
+            this.ctx.lineTo( this.ctx.canvas.width + 30, 0.5 + x + 30);
+            this.ctx.strokeStyle = "black";
+            this.ctx.stroke();
+            
+
             this.ctx.fillStyle = COLORS[value];
             this.ctx.fillRect(x, y, 1, 1);
           }
