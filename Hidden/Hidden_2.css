@@ -1,0 +1,23 @@
+
+  #container {
+	position: relative;
+  }
+  #container canvas, #overlay {
+	position: absolute;
+  }
+
+  body {
+	background-color: #111;
+  }
+
+  #overlay{
+	color: azure;
+  }
+
+  .center {
+	margin: auto;
+	width: 100%;
+	border: 0px solid green;
+	padding-top: 28em;
+	text-align: center;
+  }
