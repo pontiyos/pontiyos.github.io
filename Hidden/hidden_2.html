@@ -7,16 +7,32 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="Hidden_2.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/b6192e7af3.js" crossorigin="anonymous"></script>
 
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 <script>
+
 	window.setTimeout( function() {
   window.location.reload();
-}, 30000);
+}, 50000);
+
+
+$( "span" ).each(function( index ) {
+  var originalText = $( this ).text();
+  var newText = "";
+  for( var i = 0; i < originalText.length; i++)
+  {
+      if (i % 3 === 0)
+        newText += "<span>" + originalText.charAt(i) + "</span>";  
+      else
+        newText += originalText.charAt(i);
+  }
+  $( this ).html(newText);
+});
+
 </script>
 
 
@@ -26,6 +42,7 @@
 		<canvas></canvas>
 	
 	<div class="fade"></div>
+	<script type="text/javascript" src="Hidden.js"></script>
 
 	<section class="star-wars">
 	  <div class="crawl">
@@ -34,9 +51,16 @@
 		  <h1>One week to Christmas</h1>
 		</div>
 
-		<p>In the third week of Advent, a sense of anticipation fills the air like the hum of lightsabers before a great battle. </p>
-		<p>As we light the third candle, symbolizing joy, let it illuminate our hearts with the warmth of hope and the promise of peace. </p>
-		<p><b class="hidden_letters">Merry Christmas</b>, and may the Force guide you through this luminous season.</p>
+		<span id="content">In the third week of Advent, a sense of anticipation fills the air like the hum of lightsabers before a great battle. <br><br>
+
+		<b>S</b>tarlight illuminates the festive spirit, bringing joy to Rebel forces gathered.<br><br>
+		<b>L</b>uminous candles symbolize the anticipation of the third week of Advent.<br><br>
+		<b>E</b>mbrace the warmth of holiday cheer and the promise of peaceful celebrations.<br><br>
+		<b>E</b>nveloped by the guiding Force, may your Christmas be filled with unity.<br><br>
+		<b>P</b>eaceful snowflakes fall as family and friends come together in celebration.<br><br>
+		<b>Y</b>uletide blessings surround you as you embrace the season's joy.<br><br>
+
+		Merry Christmas, and may the Force guide you through this luminous season.</span>
 
 	</div>
 	</section>
@@ -44,6 +68,6 @@
 
 </body>
 
-<script type="text/javascript" src="Hidden.js"></script>
+
 
 </html>

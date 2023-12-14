@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d')
 
 let width, height, lastNow
 let snowflakes
-const maxSnowflakes = 100
+const maxSnowflakes = 400
 
 function init() {
   snowflakes = []
@@ -95,6 +95,8 @@ function resize() {
 }
 
 window.addEventListener('resize', resize)
-window.addEventListener('blur', pause)
-window.addEventListener('focus', resume)
+//window.addEventListener('blur', pause)
+//window.addEventListener('focus', resume)
 init()
+
+
