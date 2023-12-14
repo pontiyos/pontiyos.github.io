@@ -20,7 +20,7 @@
 	justify-content: center;
 	position: relative;
 	height: 800px;
-	color: #feda4a;
+	color: #036603;
 	font-family: 'Pathway Gothic One', sans-serif;
 	font-size: 500%;
 	font-weight: 600;
@@ -67,4 +67,15 @@
   }
   #container canvas, #overlay {
 	position: absolute;
+  }
+
+  .center {
+	margin: auto;
+	width: 100%;
+	padding-top: 28em;
+	text-align: center;
+  }
+
+  hidden_letters{  
+	color:#660a03;
   }
