@@ -107,10 +107,14 @@ html, body {
     font-weight: 600;
 }
 
-.Christmas-text{
+.Christmas-text, .christmas-label{
     font-family: 'Lobster';
     font-size: 32px;
     transform: scale(.8, 1);
     font-weight: 600;
     color: antiquewhite;
+}
+
+.christmas-label{
+    padding-bottom: 2em;
 }

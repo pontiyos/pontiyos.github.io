@@ -1,0 +1,388 @@
+$green: #24D024;
+$yellow: #fff952;
+$pink: #f53896;
+$red: #fb4545;
+$blue: #0A53DE;
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+body {
+    background-color: #000000;
+  overflow : hidden; 
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 80px;
+    text-align: center;
+    color: white;
+    letter-spacing: 3px;
+}
+
+.drop {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    border-radius: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px #FFF
+}
+
+.animate {
+    animation: falling 5.5s infinite ease-in;
+}
+
+@keyframes falling {
+    0% {
+        top: -10px;
+        // opacity: 1;
+    }
+    10% {
+        transform: translateX(-5px)
+    }
+    20% {
+        transform: translateX(5px)
+    }
+    30% {
+        transform: translateX(-5px)
+    }
+    40% {
+        transform: translateX(5px)
+    }
+    60% {
+        transform: translateX(-5px)
+    }
+    70% {
+        transform: translateX(5px)
+    }
+    80% {
+        transform: translateX(-5px)
+    }
+    90% {
+        transform: translateX(5px)
+    }
+    95% {
+        opacity: 1
+    }
+    100% {
+        top: 95vh;
+        opacity: 0;
+    }
+}
+
+.line{
+  text-align: center; 
+}
+
+.line li {
+    position: relative;
+    margin: 0 15px;
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+    width: 12px;
+    height: 28px;
+    border-radius: 50%;
+    top: 35px;
+    background: #fff;
+    &:before {
+        content: "";
+        position: absolute;
+        background: #222;
+        width: 10px;
+        height: 9px;
+        border-radius: 3px;
+        top: -4px;
+        left: 1px;
+    }
+    &:after {
+        content: "";
+        top: -14px;
+        left: 9px;
+        position: absolute;
+        width: 52px;
+        height: 19px;
+        border-bottom: solid #222 2px;
+        border-radius: 30%;
+    }
+}
+
+.line .red {
+    background-color: $red;
+    animation: lightningRed 1s infinite;
+}
+
+.line .green {
+    background-color: $green;
+    animation: lightningGreen 1.5s infinite;
+}
+
+.line .yellow {
+    background-color: $yellow;
+    animation: lightningYellow 2s infinite;
+}
+
+.line .blue {
+    background-color: $blue;
+    animation: lightningBlue 2.5s infinite;
+}
+
+.line .pink {
+    background-color: $pink;
+    animation: lightningPink 2s infinite;
+}
+
+@keyframes lightningRed {
+    0% {
+        box-shadow: 5px 10px 35px 10px $red;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 10px 35px 10px $red;
+    }
+}
+
+@keyframes lightningGreen {
+    0% {
+        box-shadow: 5px 0 35px 10px $green;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $green;
+    }
+}
+
+@keyframes lightningYellow {
+    0% {
+        box-shadow: 5px 0 35px 10px $yellow;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $yellow;
+    }
+}
+
+@keyframes lightningBlue {
+    0% {
+        box-shadow: 5px 0 35px 10px $blue;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $blue;
+    }
+}
+
+@keyframes lightningPink {
+    0% {
+        box-shadow: 5px 0 35px 10px $pink;
+    }
+    50% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 5px 0 35px 10px $pink;
+    }
+}
+
+@media (max-width: 1024px) {
+  .line{
+    padding: 0; 
+  }
+    li {
+        margin: 0 15px 20px 15px;
+    }
+}
+
+
+.rotatingText { 
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  text-align: center;
+}
+
+.rotatingText-content { 
+  position: relative;
+  width: 100%;
+}
+
+.rotatingText-description { 
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 14px;
+  margin: 0;
+  color : white;
+  
+  @media (min-width: 768px) { 
+    font-size: 18px;
+  }
+}
+
+
+div.rotatingText-content{
+  
+   font-size: 32px;
+   left: 0;
+   margin-bottom: 0.5em;
+   margin-top: 30px;
+   opacity: 0;
+   position: absolute;
+   right: 0;
+   text-align: center;
+   text-transform: uppercase;
+   top: 0;
+   color : antiquewhite;
+   @media (min-width: 768px) { 
+     font-size: 70px;
+   }
+
+  
+  /* 
+   &:nth-of-type(1) { 
+     animation: rotate-text-up 7.5s 3.5s infinite; //Total :
+   }
+   */
+/*
+   &:nth-of-type(2) { 
+     animation: rotate-text-up 1.5s 2.5s infinite; //Total :
+   }  
+  
+   &:nth-of-type(3) { 
+     animation: fade-text-in 2.5s 0.5s infinite; //Total : 
+   }
+   */
+   
+   
+/*
+   div.rotatingText-content{
+    &>h2{
+        animation: rotate-text-up 1.5s 2s infinite;
+    } 
+   }
+
+   h2.rotatingText-word{
+    animation: rotate-text-up 1.5s 2s infinite;
+   }
+   */
+ 
+ }
+ 
+
+ div.rotatingText-content { animation: rotate-text-up 7.5s 3.5s infinite;
+    &>h2{
+        font-size: 40px;
+        opacity: 0;
+        position: absolute;
+        text-transform: uppercase;
+       
+        color : antiquewhite;
+        @media (min-width: 768px) { 
+          font-size: 70px;
+        }
+        animation: rotate-text-up 7.5s 3.5s infinite; 
+    }
+
+    #word-one{
+        left: 2em;
+        right: 0;
+        top: 0;
+        text-align: left;
+        margin-bottom: 0;
+        margin-top: 20%;
+    }
+    #word-two{
+        left: 0.5em;
+        right: 0;
+        top: 0;
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 20%;
+    }
+    #word-three{
+        left: 0;
+        right: 2em;
+        top: 0;
+        text-align: right;
+        margin-bottom: 0;
+        margin-top: 20%;
+    }
+    #word-four{
+        left: 0.5em;
+        right: 0;
+        top: 0;
+        text-align: left;
+        margin-bottom: 0;
+        margin-top: 25%;
+    }
+    #word-five{
+        left: 0;
+        right: 0;
+        top: 0;
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 15%;
+    }
+    #word-six{
+        left: 0;
+        right: 0;
+        top: 0;
+        text-align: right;
+        margin-bottom: 0;
+        margin-top: 15%;
+    }
+
+    #highlight{color: #fb4545 !important;}
+
+ }
+ 
+.center-div{
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 15%;
+    font-size: 40px;
+    opacity: 0;
+    position: absolute;
+    text-transform: uppercase;
+    color : antiquewhite;
+
+}
+
+ // Animations
+ @keyframes rotate-text-up { 
+   0% {
+     transform: translate3d(0, 80px, 0);
+     opacity: 0;
+   }
+  
+   20%, 80% {
+     transform: translate3d(0, 0, 0);
+     opacity: 1;
+   }
+  
+   100% {
+     transform: translate3d(0, -40px, 0);
+     opacity: 0;
+   }
+ }
+
+ @keyframes fade-text-in { 
+   0% {
+     opacity: 0;
+     transform: translate3d(0, 80px, 0);
+   }
+ 
+   50%, 100% {
+     opacity: 1;
+     transform: translate3d(0, 0, 0);
+   }
+ }
