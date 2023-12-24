@@ -275,7 +275,7 @@ div.rotatingText-content{
  }
  
 
- div.rotatingText-content { animation: rotate-text-up 7.5s 3.5s infinite;
+ div.rotatingText-content { animation: rotate-text-up 4.5s 2.5s infinite;
     &>h2{
         font-size: 40px;
         opacity: 0;
@@ -327,7 +327,7 @@ div.rotatingText-content{
         top: 0;
         text-align: center;
         margin-bottom: 0;
-        margin-top: 15%;
+        margin-top: 25%;
     }
     #word-six{
         left: 0;
@@ -335,7 +335,25 @@ div.rotatingText-content{
         top: 0;
         text-align: right;
         margin-bottom: 0;
+        margin-top: 25%;
+    }
+
+    #word-seven{
+        left: 2em;
+        right: 0;
+        top: 0;
+        text-align: left;
+        margin-bottom: 0;
         margin-top: 15%;
+    }
+
+    #word-eight{
+        left: 0;
+        right: 2em;
+        top: 0;
+        text-align: right;
+        margin-bottom: 0;
+        margin-top: 10%;
     }
 
     #highlight{color: #fb4545 !important;}

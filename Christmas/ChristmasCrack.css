@@ -7,17 +7,15 @@
   cursor: pointer;
 }
 .cracker:hover .cracker-left {
-  left: em(-120);
+  left: -20em;
   left: -8em;
-  top: em(50);
-  top: 5em;
+  top: 8em;
   transform: rotate(-15deg);
 }
 .cracker:hover .cracker-right {
-  right: em(-120);
+  right: 20em;
   right: -8em;
-  top: em(50);
-  top: 5em;
+  top: 8em;
   transform: rotate(15deg);
 }
 
@@ -46,7 +44,7 @@
 .cracker-left-inner:before, .cracker-right-inner:before {
   content: "";
   height: 100%;
-  width: em(10);
+  width: 10em;
   background-color: #ad1715;
   position: absolute;
   z-index: 10;
@@ -54,26 +52,26 @@
 }
 
 .cracker-left-inner:before {
-  left: em(-5);
+  left: -5em;
   top: 0;
 }
 
 .cracker-right-inner:before {
-  right: em(-5);
+  right: -5em;
   top: 0;
 }
 
 .cracker-message {
-  padding: em(15) 0;
+  padding: 15em 0;
   width: 25%;
   margin: 0 auto;
 }
 .cracker-message .cracker-message__inner {
-  padding: em(10);
+  padding: 10em;
   background: #ececec;
   color: #6c6c6c;
   text-align: center;
-  font-size: em(13);
+  font-size: 13em;
   text-transform: uppercase;
   font-weight: bold;
   font-family: "Shadows Into Light Two", cursive;
@@ -103,40 +101,41 @@
 }
 
 .cracker-left__tail, .cracker-right__tail {
-  width: em(100);
+  width: 20em;
   height: 100%;
   background-color: #e74241;
 }
 
+/*
 .cracker-left__end, .cracker-right__end {
-  width: em(20);
+  width: 20em;
   height: 100%;
-  background-color: #ad1715;
+  background-color: darken($cracker--bk-color, 10%);
+  &:before {
+    content: "";
+    height: 55em;
+    width: 15em;
+    background-color: #FFB20F;
+    position: absolute;
+    top : 21em;
+    z-index: 15;
+    border: 1em solid darken(#FFB20F, 5%);
+    border-radius: 5em;
+  }
 }
-.cracker-left__end:before, .cracker-right__end:before {
-  content: "";
-  height: em(55);
-  width: em(15);
-  background-color: #FFB20F;
-  position: absolute;
-  top: em(21);
-  z-index: 15;
-  border: em(1) solid #f5a600;
-  border-radius: em(5);
-}
-
+*/
 .cracker-left__end {
-  left: em(100);
+  left: 20em;
 }
 .cracker-left__end:before {
-  left: em(-10);
+  left: -10em;
 }
 
 .cracker-right__end {
-  right: em(100);
+  right: 20em;
 }
 .cracker-right__end:before {
-  right: em(-10);
+  right: -10em;
 }
 
 .cracker-left__mask-top,
@@ -150,18 +149,18 @@
 .cracker-left__mask-bottom,
 .cracker-right__mask-top,
 .cracker-right__mask-bottom {
-  width: em(140);
-  height: em(25);
+  width: 30em;
+  height: 12em;
 }
 
 .cracker-left__mask-top,
 .cracker-left__mask-bottom {
-  left: em(30);
+  left: 10em;
 }
 
 .cracker-right__mask-top,
 .cracker-right__mask-bottom {
-  right: em(30);
+  right: 10em;
 }
 
 .cracker-right__mask-bottom, .cracker-left__mask-top {
@@ -182,7 +181,7 @@
 
 .cracker-left__mask-top,
 .cracker-right__mask-top {
-  top: em(-35);
+  top: -15em;
 }
 
 .cracker-right__mask-top {
@@ -195,7 +194,7 @@
 
 .cracker-left__mask-bottom,
 .cracker-right__mask-bottom {
-  bottom: em(-35);
+  bottom: -15em;
 }
 
 .cracker-left-zigzag {
@@ -206,14 +205,14 @@
 }
 .cracker-right-zigzag {
   position: absolute;
-  left: em(-10);
+  left: -10em;
   top: 0;
   height: 100%;
 }
 .hover-me-text {
   text-align: center;
-  margin-top: em(50);
+  margin-top: 20em;
   font-family: "Shadows Into Light Two", cursive;
   text-transform: uppercase;
-  /*   text-decoration: underline; */
+  text-decoration: underline;
 }/*# sourceMappingURL=ChristmasCrack.css.map */
