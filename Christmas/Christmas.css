@@ -1,4 +1,9 @@
-body { margin: 0; }
+body { 
+    margin: 0; 
+    width: auto;
+    height: 100%;
+    
+}
 .button {
 	display: inline-block;
 	-webkit-box-sizing:border-box;
