@@ -7,9 +7,9 @@ body {
 
 h1 {
   font-family: "Lobster", cursive;
-  font-size: 80px;
+  font-size: 40px;
   text-align: center;
-  color: white;
+  color: antiquewhite;
   letter-spacing: 3px;
 }
 
@@ -256,90 +256,188 @@ div.rotatingText-content {
   }
 }
 
-div.rotatingText-content {
-  animation: rotate-text-up 4.5s 2.5s infinite;
+@media (min-width: 601px) {
+  div.rotatingText-content {
+    animation: rotate-text-up 4.5s 2.5s infinite;
+  }
+  div.rotatingText-content > h2 {
+    font-size: 4em;
+    opacity: 0;
+    position: absolute;
+    text-transform: uppercase;
+    color: antiquewhite;
+    animation: rotate-text-up 7.5s 3.5s infinite;
+  }
 }
-div.rotatingText-content > h2 {
-  font-size: 1em;
-  opacity: 0;
-  position: absolute;
-  text-transform: uppercase;
-  color: antiquewhite;
-  animation: rotate-text-up 7.5s 3.5s infinite;
-}
-@media (min-width: 768px) {
+@media (min-width: 601px) and (min-width: 768px) {
   div.rotatingText-content > h2 {
     font-size: 70px;
   }
 }
-div.rotatingText-content #word-one {
-  left: 2em;
-  right: 0;
-  top: 0;
-  text-align: left;
-  margin-bottom: 0;
-  margin-top: 20%;
+@media (min-width: 601px) {
+  div.rotatingText-content #word-one {
+    left: 2em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 20%;
+  }
+  div.rotatingText-content #word-two {
+    left: 0.5em;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 20%;
+  }
+  div.rotatingText-content #word-three {
+    left: 0;
+    right: 2em;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 20%;
+  }
+  div.rotatingText-content #word-four {
+    left: 0.5em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 25%;
+  }
+  div.rotatingText-content #word-five {
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 25%;
+  }
+  div.rotatingText-content #word-six {
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 25%;
+  }
+  div.rotatingText-content #word-seven {
+    left: 2em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 15%;
+  }
+  div.rotatingText-content #word-eight {
+    left: 0;
+    right: 2em;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 10%;
+  }
+  div.rotatingText-content #highlight {
+    color: #fb4545 !important;
+  }
 }
-div.rotatingText-content #word-two {
-  left: 0.5em;
-  right: 0;
-  top: 0;
-  text-align: center;
-  margin-bottom: 0;
-  margin-top: 20%;
+@media (max-width: 600px) {
+  div.rotatingText-content {
+    animation: rotate-text-up 4.5s 2.5s infinite;
+  }
+  div.rotatingText-content > h2 {
+    font-size: 1em;
+    opacity: 0;
+    position: absolute;
+    text-transform: uppercase;
+    color: antiquewhite;
+    animation: rotate-text-up 7.5s 3.5s infinite;
+  }
 }
-div.rotatingText-content #word-three {
-  left: 0;
-  right: 2em;
-  top: 0;
-  text-align: right;
-  margin-bottom: 0;
-  margin-top: 20%;
+@media (max-width: 600px) and (min-width: 768px) {
+  div.rotatingText-content > h2 {
+    font-size: 70px;
+  }
 }
-div.rotatingText-content #word-four {
-  left: 0.5em;
-  right: 0;
-  top: 0;
-  text-align: left;
-  margin-bottom: 0;
-  margin-top: 25%;
+@media (max-width: 600px) {
+  div.rotatingText-content #word-one {
+    left: 2em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 20%;
+    padding-top: 6em;
+  }
+  div.rotatingText-content #word-two {
+    left: 0.5em;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 20%;
+    padding-top: 8em;
+  }
+  div.rotatingText-content #word-three {
+    left: 0;
+    right: 2em;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 20%;
+    padding-top: 10em;
+  }
+  div.rotatingText-content #word-four {
+    left: 0.5em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 25%;
+    padding-top: 12em;
+  }
+  div.rotatingText-content #word-five {
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 25%;
+    padding-top: 14em;
+  }
+  div.rotatingText-content #word-six {
+    left: 0;
+    right: 0;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 25%;
+    padding-top: 16em;
+  }
+  div.rotatingText-content #word-seven {
+    left: 2em;
+    right: 0;
+    top: 0;
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 15%;
+    padding-top: 18em;
+  }
+  div.rotatingText-content #word-eight {
+    left: 0;
+    right: 2em;
+    top: 0;
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 10%;
+    padding-top: 20em;
+  }
+  div.rotatingText-content #highlight {
+    color: #fb4545 !important;
+  }
 }
-div.rotatingText-content #word-five {
-  left: 0;
-  right: 0;
-  top: 0;
-  text-align: center;
-  margin-bottom: 0;
-  margin-top: 25%;
-}
-div.rotatingText-content #word-six {
-  left: 0;
-  right: 0;
-  top: 0;
-  text-align: right;
-  margin-bottom: 0;
-  margin-top: 25%;
-}
-div.rotatingText-content #word-seven {
-  left: 2em;
-  right: 0;
-  top: 0;
-  text-align: left;
-  margin-bottom: 0;
-  margin-top: 15%;
-}
-div.rotatingText-content #word-eight {
-  left: 0;
-  right: 2em;
-  top: 0;
-  text-align: right;
-  margin-bottom: 0;
-  margin-top: 10%;
-}
-div.rotatingText-content #highlight {
-  color: #fb4545 !important;
-}
-
 .center-div {
   left: 0;
   right: 0;

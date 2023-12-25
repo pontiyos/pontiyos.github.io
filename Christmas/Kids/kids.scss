@@ -12,9 +12,9 @@ body {
 
 h1 {
     font-family: 'Lobster', cursive;
-    font-size: 80px;
+    font-size: 40px;
     text-align: center;
-    color: white;
+    color: antiquewhite;
     letter-spacing: 3px;
 }
 
@@ -274,10 +274,11 @@ div.rotatingText-content{
  
  }
  
-
+ $breakpoint-computer: 601px;
+ @media (min-width: $breakpoint-computer) {
  div.rotatingText-content { animation: rotate-text-up 4.5s 2.5s infinite;
     &>h2{
-        font-size: 1em;
+        font-size: 4em;
         opacity: 0;
         position: absolute;
         text-transform: uppercase;
@@ -358,6 +359,105 @@ div.rotatingText-content{
 
     #highlight{color: #fb4545 !important;}
 
+ }
+}
+
+ $breakpoint-phone: 600px;
+ @media (max-width: $breakpoint-phone) {
+   
+    div.rotatingText-content { animation: rotate-text-up 4.5s 2.5s infinite;
+        &>h2{
+            font-size: 1em;
+            opacity: 0;
+            position: absolute;
+            text-transform: uppercase;
+           
+            color : antiquewhite;
+            @media (min-width: 768px) { 
+              font-size: 70px;
+            }
+            animation: rotate-text-up 7.5s 3.5s infinite; 
+        }
+    
+        #word-one{
+            left: 2em;
+            right: 0;
+            top: 0;
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 20%;
+            padding-top: 6em;
+        }
+        #word-two{
+            left: 0.5em;
+            right: 0;
+            top: 0;
+            text-align: center;
+            margin-bottom: 0;
+            margin-top: 20%;
+            padding-top: 8em;
+        }
+        #word-three{
+            left: 0;
+            right: 2em;
+            top: 0;
+            text-align: right;
+            margin-bottom: 0;
+            margin-top: 20%;
+            padding-top: 10em;
+        }
+        #word-four{
+            left: 0.5em;
+            right: 0;
+            top: 0;
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 25%;
+            padding-top: 12em;
+        }
+        #word-five{
+            left: 0;
+            right: 0;
+            top: 0;
+            text-align: center;
+            margin-bottom: 0;
+            margin-top: 25%;
+            padding-top: 14em;
+        }
+        #word-six{
+            left: 0;
+            right: 0;
+            top: 0;
+            text-align: right;
+            margin-bottom: 0;
+            margin-top: 25%;
+            padding-top: 16em;
+        }
+    
+        #word-seven{
+            left: 2em;
+            right: 0;
+            top: 0;
+            text-align: left;
+            margin-bottom: 0;
+            margin-top: 15%;
+            padding-top: 18em;
+        }
+    
+        #word-eight{
+            left: 0;
+            right: 2em;
+            top: 0;
+            text-align: right;
+            margin-bottom: 0;
+            margin-top: 10%;
+            padding-top: 20em;
+        }
+    
+        #highlight{color: #fb4545 !important;}
+    
+     }
+    
  }
  
 .center-div{
