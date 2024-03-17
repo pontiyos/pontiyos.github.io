@@ -11,7 +11,7 @@ function getLocation() {
   }
 
 function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude +" Longitude: " + position.coords.longitude );
+    //console.log("Latitude: " + position.coords.latitude +" Longitude: " + position.coords.longitude );
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
@@ -40,16 +40,16 @@ function getWeather (lat,lon){
     fetch(apiUrl, myInit)
     .then(res => { 
         if(res.ok){
-            console.log("OK")
+            //console.log("OK")
             return res.json();
         }
         else{
-            console.log("ERROR");
+            //console.log("ERROR");
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     })
     .then(data => {
-        console.log(data);
+        //console.log(data);
         weatherInfo(data,userLocation);
     })
 
@@ -70,7 +70,7 @@ function displayLocation(latitude,longitude,callback){
 
         }
         else{
-            console.log("ERROR "+ typeof callback);
+            //console.log("ERROR "+ typeof callback);
         }
     }
     xttp.send();

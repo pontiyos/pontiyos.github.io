@@ -86,9 +86,9 @@
   <!-- <p class="w3-center"><em>Adobe</em></p> -->
 
 
-  <div class="container">
+  <div class="container" style="width: -webkit-fill-available;">
+  
     <div class="panel-group" id="accordion">
-      
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
@@ -101,7 +101,6 @@
             <div class="w3-col m6">
               <img class="w3-auto w3-hover-opacity" src="cert\acc_developer_cert.png" style=" max-height: 300px;" onclick="enlargeImg(this)"  alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
             </div>
-        
             <div class="w3-col m6">
               <img class="w3-auto w3-hover-opacity" src="cert\arcdp_bp_cert.png" style="max-height: 300px;" onclick="enlargeImg(this)" alt="Adobe Certified Professional - Adobe Real-Time CDP Business Practitioner certificate">
             </div>  
@@ -315,7 +314,7 @@
     </div>
     <div class="w3-col m8 w3-panel">
 
-      <p>&nbsp;<a style="text-decoration: none;" href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> Find me on Linkedin for easy contact  <i class="fa fa-linkedin w3-hover-opacity"></i>&nbsp;</a>or send me a message from the form below</p>
+      <p>&nbsp;<a style="text-decoration: none; color: black;" href="https://www.linkedin.com/in/erik-rosenstr%C3%B6m-461906156/" target="_blank"> Find me on Linkedin for easy contact  <i class="fa fa-linkedin w3-hover-opacity"></i>&nbsp;</a>or send me a message from the form below</p>
       
       <form id="contactMe">
         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
@@ -369,7 +368,6 @@ function emailConfirmation() {
 function emailTrigger(){
   var myForm = document.getElementById("contactMe");
   emailjs.sendForm('service_zu6o00w', 'template_k4vuiqx',myForm).then(function(response) {
-       console.log('SUCCESS!', response.status, response.text, 'Email sent!');
        emailConfirmation();
     }, function(error) {
        console.log('FAILED...', error);
