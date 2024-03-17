@@ -1,5 +1,6 @@
 html, body {
   margin: 0;
+  zoom: 98% !important;
 }
 
 .above-fold {

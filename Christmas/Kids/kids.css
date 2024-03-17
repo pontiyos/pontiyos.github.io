@@ -3,6 +3,7 @@
 body {
   background-color: #000000;
   overflow: hidden;
+  zoom: 80% !important;
 }
 
 h1 {

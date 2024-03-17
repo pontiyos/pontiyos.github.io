@@ -1,0 +1,17 @@
+ /* Style for iframe container */
+ #certIframeContainer {
+    display: none; /* Initially hide the iframe container */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    z-index: 9999; /* Ensure it appears above other content */
+  }
+  #certIframe {
+    width: 80%;
+    height: 80%;
+    margin: 10% auto; /* Center the iframe vertically and horizontally */
+    border: none; /* Remove iframe border */
+  }

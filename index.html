@@ -6,15 +6,20 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="weather.css">
-
+<link rel="stylesheet" href="index.css">
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/b6192e7af3.js" crossorigin="anonymous"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript" src="js\weather.js"></script>
 <script type="text/javascript" src="js\main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 <body>
 
@@ -55,18 +60,15 @@
 <!-- First text area-->
   <div class="w3-content w3-container w3-padding-64" id="about-me">
     <h2>About me</h2>
-    <p>
-      I'm a CRM developer with over 5 years of experience working with the leading CRM systems for national and international clients in Sweden and Denmark.
-    </p>
-    <p>
-      Working with a range of task from campaign configuration and template development to system integrations and server configuration.
-    </p>
-    <p>
-      I'm flexible and a team player. Always taking the project and team needs into account.
-    </p>
-    <p>         
-      I'm result driven and therefore I perform best when I can see a project through from end-to-end.
-    </p>
+    <p>Welcome to my personal website!</p>
+    <p>I'm Erik, a CRM developer with six years of experience specializing in leading CRM systems for national and international clients in Sweden and Denmark.</p>
+    <p>I handle a range of tasks from campaign configuration and template development to system integrations and server configuration. I prioritize project and team needs, am flexible, and work well in collaborative environments.</p>
+    <p>Feel free to explore my spare time projects or use the contact form below.</p>
+    <p>Thank you for visiting, and I look forward to connecting with you soon.</p>
+    
+    <p>Best regards,<br>
+    Erik</p>
+    
   </div>
 
 <!-- Second Parallax Image with Certificates Text -->
@@ -79,20 +81,193 @@
 <!-- Container (Certificates Section) -->
 <div class="w3-content w3-container w3-padding-64" id="certificates">
   <h3 class="w3-center">MY CERTIFICATES</h3>
-  <p class="w3-center"><em>Here are some of my certificates</em></p>
-  <p class="w3-center"><em>Adobe</em></p>
+  <!-- <p class="w3-center"><em>Here are some of my certificates</em></p> -->
+  
+  <!-- <p class="w3-center"><em>Adobe</em></p> -->
 
+
+  <div class="container">
+    <div class="panel-group" id="accordion">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Adobe</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+          <div class="panel-body">
+
+            <div class="w3-col m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\acc_developer_cert.png" style=" max-height: 300px;" onclick="enlargeImg(this)"  alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
+            </div>
+        
+            <div class="w3-col m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\arcdp_bp_cert.png" style="max-height: 300px;" onclick="enlargeImg(this)" alt="Adobe Certified Professional - Adobe Real-Time CDP Business Practitioner certificate">
+            </div>  
+
+        </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Linkedin Managment</a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body">
+
+
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Becoming a Great Conversationalist-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Becoming a Great Conversationalist">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Communication Skills for Modern Management-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Communication Skills for Modern Management">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Developing Your Emotional Intelligence-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Developing Your Emotional Intelligence">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Essential Lessons for FirstTime Managers-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Essential Lessons for First-Time Managers">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_How to Think Strategically-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="How to Think Strategically">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Human Leadership-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Human Leadership">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Leading and Motivating People with Different Personalities-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Leading and Motivating People with Different Personalities">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Why Trust Matters with Rachel Botsman-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Why Trust Matters with Rachel Botsman">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Leading with Stability during Times of Change and Disruption-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Leading with Stability during Times of Change and Disruption">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Quick Scripts for Difficult Conversations-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Quick Scripts for Difficult Conversations">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Talking About Mental Health as a Leader-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Talking About Mental Health as a Leader">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_The 7 Secrets of Responsive Leadership getAbstract Summary-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="The 7 Secrets of Responsive Leadership">
+            </div>
+            <div class="w3-quarter m6">
+              <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Transitioning to Product Management-page-00001.jpg" style=" max-height: 10em;" onclick="enlargeImg(this)"  alt="Transitioning to Product Management">
+            </div>
+
+
+            </div>  
+        </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Linkedin LEAN</a>
+            </h4>
+          </div>
+          <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+              
+              <div class="w3-col m6">
+                <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Lean Foundations-page-00001.jpg" style=" max-height: 15em;" onclick="enlargeImg(this)"  alt="Lean Foundations">
+              </div>
+
+              
+          </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Linkedin General</a>
+            </h4>
+          </div>
+          <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+              
+              <div class="w3-col m6">
+                <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Agile Testing-page-00001.jpg" style=" max-height: 15em;" onclick="enlargeImg(this)"  alt="Agile Testing">
+              </div>
+              <div class="w3-col m6">
+                <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_The Upskilling Imperative Blinkist Summary-page-00001.jpg" style=" max-height: 15em;" onclick="enlargeImg(this)"  alt="The Upskilling Imperative">
+              </div>
+
+              
+          </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Linkedin Software</a>
+            </h4>
+          </div>
+          <div id="collapse5" class="panel-collapse collapse">
+            <div class="panel-body">
+
+              <div class="w3-col.l12 m6">
+                <img class="w3-auto w3-hover-opacity" src="cert\Linkedin\Image\CertificateOfCompletion_Software Architecture From Developer to Architect-page-00001.jpg" style=" max-height: 15em;" onclick="enlargeImg(this)"  alt="Software Architecture: From Developer to Architect">
+              </div>
+
+              
+          </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Other</a>
+            </h4>
+          </div>
+          <div id="collapse6" class="panel-collapse collapse">
+            <div class="panel-body">
+  
+              <div class="w3-col m6" >
+                <img class="w3-auto w3-hover-opacity" src="cert\smc_fundamentals_cert.png" style="width:auto; max-height: 15em;" onclick="enlargeImg(this)" alt="Selligent Fundamentals certificate">
+              </div>
+  
+              <div class="w3-col m6" >
+                <img class="w3-auto w3-hover-opacity" src="img\cambridge_university_press_assessment_english_logo.jpg" style="width:auto; height: 15em;" onclick="enlargeImg(this)" alt="Cambridge English Level 1 Certificate in ESOL International">
+              </div>
+
+              
+          </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div> 
+  </div>
+
+  <div id="certIframeContainer">
+    <iframe id="certIframe"></iframe>
+  </div>
+
+  </div>
+  
   <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
   <div class="w3-row-padding w3-center">
-    
+   <!-- 
     <div class="w3-col m6">
       <img class="w3-auto w3-hover-opacity" src="cert\acc_developer_cert.png" style=" max-height: 300px;" onclick="enlargeImg(this)"  alt="Adobe Certified Professional - Adobe Campaign Classic Developer certificate">
     </div>
 
     <div class="w3-col m6">
       <img class="w3-auto w3-hover-opacity" src="cert\arcdp_bp_cert.png" style="max-height: 300px;" onclick="enlargeImg(this)" alt="Adobe Certified Professional - Adobe Real-Time CDP Business Practitioner certificate">
-    </div>    
-
+    </div>  
+  -->  
+<!--
     <div class="w3-row-padding w3-center"> <p class="w3-center"><em>Selligent</em></p></div>
 
     <div class="w3-col.l12 m6" >
@@ -100,6 +275,7 @@
     </div>
     
   </div>
+-->
 
 </div>
 
