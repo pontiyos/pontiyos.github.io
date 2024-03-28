@@ -1,32 +1,46 @@
+/**
+ * Initiates the process of getting the user's location.
+ */
 getLocation();
-var userLocation = "";
-var weatherObj;
+var userLocation = ""; // Stores the user's location
+var weatherObj; // Stores weather data
 
+/**
+ * Retrieves the user's current location using geolocation API.
+ */
 function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      console.log("Geolocation is not supported by this browser");
+        console.log("Geolocation is not supported by this browser");
     }
-  }
+}
 
+/**
+ * Callback function triggered when the user's position is obtained.
+ * @param {Position} position - The position object containing coordinates.
+ */
 function showPosition(position) {
-    //console.log("Latitude: " + position.coords.latitude +" Longitude: " + position.coords.longitude );
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
-    displayLocation(lat,lon, function(){
+    // Displays the user's location and fetches weather data
+    displayLocation(lat, lon, function () {
         var resp = JSON.parse(this.responseText);
         weatherObj = resp;
         userLocation = resp.address.city;
-        getWeather(lat,lon);
+        getWeather(lat, lon);
     });
-   
 }
-function getWeather (lat,lon){
-    //let apiBaseUrl = 'https://api.met.no/weatherapi/locationforecast/2.0/complete?';
+
+/**
+ * Fetches weather data from a weather API based on latitude and longitude.
+ * @param {number} lat - Latitude of the location.
+ * @param {number} lon - Longitude of the location.
+ */
+function getWeather(lat, lon) {
     let apiBaseUrl = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?';
-    let apiUrl = apiBaseUrl+'lat='+lat+'&lon='+lon;
+    let apiUrl = apiBaseUrl + 'lat=' + lat + '&lon=' + lon;
 
     let myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json');
@@ -38,66 +52,66 @@ function getWeather (lat,lon){
     };
 
     fetch(apiUrl, myInit)
-    .then(res => { 
-        if(res.ok){
-            //console.log("OK")
-            return res.json();
-        }
-        else{
-            //console.log("ERROR");
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    })
-    .then(data => {
-        //console.log(data);
-        weatherInfo(data,userLocation);
-    })
-
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        })
+        .then(data => {console.log(data)
+            weatherInfo(data, userLocation);
+        });
 }
 
-function displayLocation(latitude,longitude,callback){
+/**
+ * Fetches reverse geocoded location information using latitude and longitude.
+ * @param {number} latitude - Latitude of the location.
+ * @param {number} longitude - Longitude of the location.
+ * @param {function} callback - Callback function to be executed after receiving location data.
+ */
+function displayLocation(latitude, longitude, callback) {
     var xttp = new XMLHttpRequest();
 
-    // Paste your LocationIQ token below.
-    xttp.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=" +latitude + "&lon=" + longitude + "&format=json", true);
-    //xttp.send();
+    // Note: Replace the below token with your LocationIQ token.
+    xttp.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=" + latitude + "&lon=" + longitude + "&format=json", true);
+
     xttp.onreadystatechange = function () {
         if (xttp.readyState == 4 && xttp.status == 200) {
-
             if (typeof callback === "function") {
                 callback.apply(xttp);
             }
-
-        }
-        else{
-            //console.log("ERROR "+ typeof callback);
         }
     }
     xttp.send();
+};
 
-  }; 
-
-function weatherInfo (myJSON,userLocation){ 
-
+/**
+ * Processes weather data and updates the UI with weather information.
+ * @param {object} myJSON - Weather data object.
+ * @param {string} userLocation - User's location.
+ */
+function weatherInfo(myJSON, userLocation) {
     let weatherHTML;
     let myLocation = userLocation;
 
-    //Full set
+    // Extracts weather information from the JSON data
     let showWeather = myJSON.properties.timeseries[0];
-    //Symbol-code
     let weatherCode = myJSON.properties.timeseries[0].data.next_1_hours.summary.symbol_code;
-    //Temp
     let temperature = myJSON.properties.timeseries[0].data.instant.details.air_temperature;
-    //Unit
-    //let showWeather4 = myJSON.properties.meta.units.air_temperature;
 
-    weatherHTML = '<a class="weather-txt"> Current weather in ' + myLocation + " " + temperature  +'℃ </a>';
-    weatherHTML += '<img class="weather-img" src='+ visualWeather(weatherCode) +' alt='+ weatherCode +'>';
+    // Constructs HTML for weather information
+    weatherHTML = '<a class="weather-txt"> Current weather in ' + myLocation + " " + temperature + '℃ </a>';
+    weatherHTML += '<img class="weather-img" src=' + visualWeather(weatherCode) + ' alt=' + weatherCode + '>';
     document.getElementById("main-weather").innerHTML = weatherHTML;
- 
 }
 
-function visualWeather (code){
+/**
+ * Generates the URL for weather image based on weather code.
+ * @param {string} code - Weather code.
+ * @returns {string} - URL for the weather image.
+ */
+function visualWeather(code) {
     let basePath = "\\weather_png\\";
     let imgPath = basePath + code + ".png";
 
@@ -105,3 +119,9 @@ function visualWeather (code){
 }
 
 
+function displayWeatherForLocation(){
+    if(userLocation){ console.log("displayWeatherForLocation location");}
+
+    if(weatherObj){console.log("displayWeatherForLocation weather");}
+
+}
