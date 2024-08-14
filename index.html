@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Erik Rosenström</title>
 <meta charset="UTF-8">
@@ -265,17 +266,23 @@
 
 <!-- Modal for full size confirmation image -->
 <div id="modal02" class="w3-modal" onclick="this.style.display='none'">
-  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image">
+    <i class="fa fa-remove"></i>
+  </span>
   <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-    <img id="img02" src="img\confirmation.png" class="w3-image">
-    <p id="caption" class="w3-opacity-min w3-large">Thank you for the email. This window will close shortly.</p>
+    <!-- Confirmation Image -->
+    <img id="img02" src="img/confirmation.png" class="w3-image">
+    <!-- Caption Text (underneath the image) -->
+    <p id="confirmation-caption" style="color: black;" class="w3-opacity-min w3-large"> Thank you for the email.<br>This window will close shortly.</p>
   </div>
 </div>
+
 
 <!-- Third Parallax Image with Portfolio Text -->
 <div class="bgimg-3 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
      <span class="w3-xxlarge w3-text-white w3-wide">CONTACT</span>
+     <button onclick="emailConfirmation()" class="w3-button w3-black w3-padding-large w3-large w3-margin-top">TEST</button>
   </div>
 </div>
 
@@ -319,18 +326,29 @@
 
 // Email confirmation
 function emailConfirmation() {
-  const element = document.createElement('img');
-  element.src = "img\confirmation.png";
-  document.getElementById("img02").src = element.src;
-  document.getElementById("modal02").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
+    const imagePath = "img/confirmation.png"; // Use the correct image path
 
-  setTimeout(function () {document.getElementById('contactMe').reset()}, 2400); 
+    // Set the image source for the modal
+    document.getElementById("img02").src = imagePath;
 
-  setTimeout(function () {document.getElementById('modal02').style.display='none'}, 5200); 
+    // Set the caption text underneath the image
+    var captionText = document.getElementById("confirmation-caption");
+    captionText.innerHTML = "Thank you for the email.<br>This window will close shortly.";
 
+    // Display the modal
+    document.getElementById("modal02").style.display = "block";
+
+    // Reset the form after 2.4 seconds
+    setTimeout(function () {
+        document.getElementById('contactMe').reset();
+    }, 240000);
+
+    // Hide the modal after 5.2 seconds
+    setTimeout(function () {
+        document.getElementById('modal02').style.display = 'none';
+    }, 520000);
 }
+
 
   (function() {
     emailjs.init("E2zRm_2T5eeYwv4dS");

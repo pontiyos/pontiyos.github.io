@@ -15,3 +15,19 @@
     margin: 10% auto; /* Center the iframe vertically and horizontally */
     border: none; /* Remove iframe border */
   }
+
+  /* Style for the confirmation modal image */
+#modal02 .w3-image {
+  width: 30%; /* Set image width to 30% */
+  max-width: 100%; /* Ensure the image does not exceed the container width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for the caption text */
+#caption {
+  color: black; /* Set text color to black */
+  background-color: rgba(255, 255, 255, 0.75); /* Light background with 75% opacity */
+  padding: 10px; /* Add padding around the text */
+  border-radius: 4px; /* Optional: add rounded corners */
+  display: inline-block; /* Ensure background color applies to the text block */
+}
