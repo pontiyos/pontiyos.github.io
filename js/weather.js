@@ -1,21 +1,20 @@
 /**
- * Initiates the process of getting the user's location.
- */
-getLocation();
-var userLocation = ""; // Stores the user's location
-var weatherObj; // Stores weather data
-
-/**
  * Retrieves the user's current location using geolocation API.
  */
 function getLocation() {
     if (navigator.geolocation) {
-        //console.log("geolocation : " + navigator.geolocation);
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         console.log("Geolocation is not supported by this browser");
     }
 }
+
+/**
+ * Initiates the process of getting the user's location.
+ */
+getLocation();
+var userLocation = ""; // Stores the user's location
+var weatherObj; // Stores weather data
 
 /**
  * Callback function triggered when the user's position is obtained.
@@ -91,20 +90,17 @@ function getWeather(lat, lon, weatherCallback, renderCallback) {
  * @param {function} callback - Callback function to be executed after receiving location data.
  */
 function displayLocation(latitude, longitude, callback) {
-    var xttp = new XMLHttpRequest();
-
-    // Note: Replace the below token with your LocationIQ token.
-    xttp.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=" + latitude + "&lon=" + longitude + "&format=json", true);
-
-    xttp.onreadystatechange = function () {
-        if (xttp.readyState == 4 && xttp.status == 200) {
+    const url = `https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=${latitude}&lon=${longitude}&format=json`;
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
             if (typeof callback === "function") {
-                callback.apply(xttp);
+                callback.call({ responseText: JSON.stringify(data) });
             }
-        }
-    }
-    xttp.send();
-};
+        })
+        .catch(error => console.error('Error fetching location data:', error));
+}
 
 /**
  * Processes weather data and updates the UI with weather information.
@@ -114,8 +110,6 @@ function displayLocation(latitude, longitude, callback) {
 function weatherInfo(myJSON, userLocation) {
     let weatherHTML;
     let myLocation = userLocation;
-
-    console.log(myJSON);
 
     // Extracts weather information from the JSON data
     let showWeather = myJSON.properties.timeseries[2];
@@ -128,6 +122,12 @@ function weatherInfo(myJSON, userLocation) {
     document.getElementById("main-weather").innerHTML = weatherHTML;
 }
 
+/**
+ * Beautifies a string by replacing underscores with spaces and capitalizing the first letter.
+ *
+ * @param {string} string - The input string to be beautified.
+ * @return {string} The beautified string.
+ */
 function beautifyString(string){
     let beautyString ="";
 
@@ -137,6 +137,12 @@ function beautifyString(string){
     return beautyString;
 }
 
+/**
+ * Returns the wind direction based on the given degrees.
+ *
+ * @param {number} degrees - The degrees of the wind direction.
+ * @return {string} The wind direction (N, NE, E, SE, S, SW, W, NW).
+ */
 function getWindDirection(degrees) {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     
@@ -276,51 +282,36 @@ function extractDailyWeatherSummary(weatherJSON) {
  * @param {Array<Object>} weatherArray - An array of objects containing weather data for each forecast item.
  * @return {string} The HTML string representing the current weather forecast.
  */
+
 function buildCurrentWeatherHtml(weatherArray) {
-    let weatherHTML = "";
+    // Helper function to create a section of HTML
+    const createSection = (header, items, className) => {
+        let sectionHTML = `<div class="${className}">${header}</div>`;
+        items.forEach(item => {
+            sectionHTML += `<div class="${className}">${item}</div>`;
+        });
+        return sectionHTML;
+    };
 
-    // Header for Time
-    weatherHTML += '<div class="forecast-header">Time</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-header">${formatTime(weatherArray[i].time)}</div>`;
-    }
+    // Extract data
+    const times = weatherArray.map(data => formatTime(data.time));
+    const icons = weatherArray.map(data => `<img src="${visualWeather(data.weatherCode || 'unknown')}" alt="${data.weatherCode || 'unknown'}">`);
+    const temperatures = weatherArray.map(data => `${data.temperature}℃`);
+    const rains = weatherArray.map(data => data.rain);
+    const humidities = weatherArray.map(data => data.humidity);
+    const winds = weatherArray.map(data => `${data.windSpeed} (${data.windDirection})`);
+    const descriptions = weatherArray.map(data => data.description || 'No description');
 
-    // Icons
-    weatherHTML += '<div class="forecast-item">Icon</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        const weatherCode = weatherArray[i].weatherCode || 'unknown'; // Use 'unknown' if weatherCode is not available
-        weatherHTML += `<div class="forecast-item icon"><img src="${visualWeather(weatherCode)}" alt="${weatherCode}"></div>`;
-    }
-
-    // Temperature
-    weatherHTML += '<div class="forecast-item">Temperature(℃)</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item temperature">${weatherArray[i].temperature}℃</div>`;
-    }
-
-    // Rain (mm)
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-tint"></i> Rain (mm)</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item rain">${weatherArray[i].rain}</div>`;
-    }
-
-    // Humidity (%)
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-tint w3-text-blue"></i> Humidity (%)</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item humidity">${weatherArray[i].humidity}</div>`;
-    }
-
-    // Wind (m/s)
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-flag"></i> Wind (m/s)</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item wind">${weatherArray[i].windSpeed}  (${weatherArray[i].windDirection})</div>`;
-    }
-
-    // Descriptions
-    weatherHTML += '<div class="forecast-item">Description</div>';
-    for (let i = 0; i < weatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item description">${weatherArray[i].description || 'No description'}</div>`;
-    }
+    // Build HTML
+    const weatherHTML = [
+        createSection('Time', times, 'forecast-header'),
+        createSection('Icon', icons, 'forecast-item icon'),
+        createSection('Temperature(℃)', temperatures, 'forecast-item temperature'),
+        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain'),
+        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity'),
+        createSection('<i class="fa fa-flag"></i> Wind (m/s)', winds, 'forecast-item wind'),
+        createSection('Description', descriptions, 'forecast-item description')
+    ].join('');
 
     return weatherHTML;
 }
@@ -332,57 +323,36 @@ function buildCurrentWeatherHtml(weatherArray) {
  * @return {string} The HTML string for the daily weather forecast.
  */
 function buildDaysWeatherHtml(dailyWeatherArray) {
+    // Helper function to create a section of HTML
+    const createSection = (header, items, className) => {
+        let sectionHTML = `<div class="${className}">${header}</div>`;
+        items.forEach(item => {
+            sectionHTML += `<div class="${className}">${item}</div>`;
+        });
+        return sectionHTML;
+    };
 
-    let weatherHTML = "";
+    // Extract data
+    const dates = dailyWeatherArray.map(data => data.date);
+    const icons = dailyWeatherArray.map(data => `<img src="${visualWeather(data.weatherCode || 'unknown')}" alt="${data.weatherCode || 'unknown'}">`);
+    const highTemps = dailyWeatherArray.map(data => `${data.highTemperature}℃`);
+    const lowTemps = dailyWeatherArray.map(data => `${data.lowTemperature}℃`);
+    const avgWinds = dailyWeatherArray.map(data => `${data.avgWindSpeed} m/s`);
+    const humidities = dailyWeatherArray.map(data => `${data.avgHumidity}%`);
+    const rains = dailyWeatherArray.map(data => `${data.totalRain} mm`);
+    const descriptions = dailyWeatherArray.map(data => data.description || 'No description');
 
-    // Header for Date
-    weatherHTML += '<div class="forecast-header">Date</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-header">${dailyWeatherArray[i].date}</div>`;
-    }
-
-    // Icons
-    weatherHTML += '<div class="forecast-item">Icon</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        const weatherCode = dailyWeatherArray[i].weatherCode || 'unknown'; // Use 'unknown' if weatherCode is not available
-        weatherHTML += `<div class="forecast-item icon"><img src="${visualWeather(weatherCode)}" alt="${weatherCode}"></div>`;
-    }
-
-    // High Temperature
-    weatherHTML += '<div class="forecast-item">High Temp (℃)</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item temperature">${dailyWeatherArray[i].highTemperature}℃</div>`;
-    }
-
-    // Low Temperature
-    weatherHTML += '<div class="forecast-item">Low Temp (℃)</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item temperature">${dailyWeatherArray[i].lowTemperature}℃</div>`;
-    }
-
-    // Average Wind Speed
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-flag"></i> Avg Wind (m/s)</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item wind">${dailyWeatherArray[i].avgWindSpeed} m/s</div>`;
-    }
-
-    // Humidity (%)
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-tint w3-text-blue"></i> Humidity (%)</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item humidity">${dailyWeatherArray[i].avgHumidity}%</div>`;
-    }
-
-    // Total Rain (mm)
-    weatherHTML += '<div class="forecast-item"><i class="fa fa-tint"></i> Rain (mm)</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item rain">${dailyWeatherArray[i].totalRain} mm</div>`;
-    }
-
-    // Description
-    weatherHTML += '<div class="forecast-item">Description</div>';
-    for (let i = 0; i < dailyWeatherArray.length; i++) {
-        weatherHTML += `<div class="forecast-item description">${dailyWeatherArray[i].description || 'No description'}</div>`;
-    }
+    // Build HTML
+    const weatherHTML = [
+        createSection('Date', dates, 'forecast-header'),
+        createSection('Icon', icons, 'forecast-item icon'),
+        createSection('High Temp (℃)', highTemps, 'forecast-item temperature'),
+        createSection('Low Temp (℃)', lowTemps, 'forecast-item temperature'),
+        createSection('<i class="fa fa-flag"></i> Avg Wind (m/s)', avgWinds, 'forecast-item wind'),
+        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity'),
+        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain'),
+        createSection('Description', descriptions, 'forecast-item description')
+    ].join('');
 
     return weatherHTML;
 }
@@ -393,20 +363,20 @@ function buildDaysWeatherHtml(dailyWeatherArray) {
  * @returns {string} - The formatted time.
  */
 function formatTime(dateTime) {
-    const date = new Date(dateTime);
-    // Format the time as HH:mm
-    return date.toISOString().substr(11, 5);
+    return dateTime.slice(11, 16);
 }
 
+/**
+ * Renders the HTML for the current weather body based on the provided weather JSON data.
+ *
+ * @param {object} weatherJSON - The JSON data containing the current weather information.
+ * @return {void}
+ */
 function renderCurrentWeatherBody(weatherJSON) {
-  
-    const weatherDataArray = extractWeatherData(weatherJSON,2 ,8);   
-
-    var currentWeatherHTML = "";
-    currentWeatherHTML = buildCurrentWeatherHtml(weatherDataArray);
-
-    document.getElementById("current-weather-container").innerHTML = currentWeatherHTML;    
-
+  const currentWeatherContainer = document.getElementById("current-weather-container");
+  if (currentWeatherContainer) {  // Check if the element exists
+    currentWeatherContainer.innerHTML = buildCurrentWeatherHtml(extractWeatherData(weatherJSON, 2, 8));
+  }
 }
 
 /**
@@ -416,16 +386,13 @@ function renderCurrentWeatherBody(weatherJSON) {
  * @return {void}
  */
 function renderCommingWeatherBody (weatherJSON){
-
-    //const weatherDataArray = extractWeatherData(weatherJSON,2 ,8);
-    const dailyWeatherArray = extractDailyWeatherSummary(weatherJSON);
-    console.log(dailyWeatherArray);
-
-    var commingWeatherHTML = "";
-    commingWeatherHTML = buildDaysWeatherHtml(dailyWeatherArray);
-
-    document.getElementById("comming-weather-container").innerHTML = commingWeatherHTML;
+    const commingWeatherContainer = document.getElementById("comming-weather-container");
+    if (commingWeatherContainer) {  // Check if the element exists
+        const dailyWeatherArray = extractDailyWeatherSummary(weatherJSON);
+        document.getElementById("comming-weather-container").innerHTML = buildDaysWeatherHtml(dailyWeatherArray);
+    }
 }
+
 
 /**
  * Generates the URL for weather image based on weather code.
@@ -433,28 +400,17 @@ function renderCommingWeatherBody (weatherJSON){
  * @returns {string} - URL for the weather image.
  */
 function visualWeather(code) {
-    let basePath = "\\weather_png\\";
-    let imgPath = basePath + code + ".png";
-
-    return imgPath;
+    return `weather_png/${code}.png`;
 }
-
 
 /**
  * Displays the weather information for the current location.
  *
  * @return {void} No return value, renders weather information to the page.
  */
-function displayWeatherForLocation(){
-
-    if (userLocation) { 
-        console.log("displayWeatherForLocation location");
-    }
-
+function displayWeatherForLocation() {
     if (weatherObj) {
-        console.log("displayWeatherForLocation weather");
-        renderCommingWeatherBody(weatherObj);
-        renderCurrentWeatherBody(weatherObj);
+     renderCommingWeatherBody(weatherObj);
+     renderCurrentWeatherBody(weatherObj);
     }
-
 }

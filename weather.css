@@ -18,9 +18,9 @@
     background-color: aliceblue !important;
 }
 
-.bgimg-2{
-    background-attachment: scroll;
-    min-height: 600px;
+.bgimg-2 {
+    background-attachment: fixed;
+    min-height: 800px;
   }
 
 .forecast-container {
