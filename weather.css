@@ -1,17 +1,17 @@
-
-.weather-select{
+/* General styles */
+.weather-select {
     cursor: pointer;
     border-radius: 0.4em;
     text-transform: uppercase;
-    letter-spacing: 8px
+    letter-spacing: 8px;
 }
 
-.weather-select:hover{
+.weather-select:hover {
     box-shadow: rgba(50, 50, 93, 0.7) 0px 50px 100px -20px, rgba(0, 0, 0, 0.95) 0px 30px 60px -30px, rgba(10, 37, 64, 0.8) 0px -2px 6px 0px inset;
     font-weight: 800;
 }
 
-.current-weather{
+.current-weather {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 8px;
@@ -20,68 +20,88 @@
 
 .bgimg-2 {
     background-attachment: fixed;
-    min-height: 800px;
-  }
+    min-height: 600px;
+}
 
-/* Base styles for the forecast container and items */
 .forecast-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* 1 for time + 7 for hours */
-    gap: 0; /* No gap between items */
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
     padding: 10px;
     background-color: #f1f1f1 !important;
 }
+
 .forecast-header, .forecast-item {
     text-align: center;
     padding: 10px;
-    border-right: 1px solid #ddd; /* Adds separation between columns */
+    border-right: 1px solid #ddd;
 }
+
 .forecast-header {
     background-color: #f1f1f1;
     font-weight: bold;
     border-bottom: 2px solid #ddd;
 }
+
 .forecast-header:last-child, .forecast-item:last-child {
-    border-right: none; /* Removes the border on the last column */
+    border-right: none;
 }
+
 .forecast-item img {
     max-height: 50px;
     vertical-align: middle;
-}
-.icon, .description, .rain, .humidity, .wind {
-    display: block;
-}
-.icon i {
-    font-size: 24px;
-    color: #333;
-}
-.description, .rain, .humidity, .wind {
-    font-size: 14px;
-    color: #555;
+    width: auto; /* Maintain aspect ratio */
 }
 
-@media only screen and (max-device-width: 1600px) {
-    .mobile.weather-place{
-        width:inherit;
+/* Media query for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+    /* Hide specific times and their associated items */
+    #time-6, #icon-6, #temperature-6, #rain-6, #humidity-6, #wind-6, #description-6,
+    #time-5, #icon-5, #temperature-5, #rain-5, #humidity-5, #wind-5, #description-5,
+    #time-4, #icon-4, #temperature-4, #rain-4, #humidity-4, #wind-4, #description-4,
+    #date-6, #icon-6, #high-temp-6, #low-temp-6, #avg-wind-6, #humidity-6, #rain-6, #description-6,
+    #date-5, #icon-5, #high-temp-5, #low-temp-5, #avg-wind-5, #humidity-5, #rain-5, #description-5,
+    #date-4, #icon-4, #high-temp-4, #low-temp-4, #avg-wind-4, #humidity-4, #rain-4, #description-4  {
+        display: none !important;
     }
-}
 
-/* Media query for mobile devices */
-@media only screen and (max-width: 767px) {
+    /* Adjust grid layout for smaller screens */
     .forecast-container {
-        grid-template-columns: repeat(1, 1fr); /* Single column layout */
+        grid-template-columns: repeat(5, 1fr);
+        padding: 4px;
     }
+
+    .icon img {
+        max-height: 20px; /* Adjust as needed */
+    }
+
     .forecast-header, .forecast-item {
-        border-right: none; /* Remove the border on mobile */
-        border-bottom: 1px solid #ddd; /* Add bottom border for separation */
+        font-size: 8px; /* Adjust font size for smaller screens */
     }
-    .forecast-item img {
-        max-height: 40px; /* Adjust icon size for smaller screens */
+
+}
+
+/* Media query for screens smaller than 380px */
+@media only screen and (max-width: 380px) {
+
+
+    /* Hide additional items if necessary */
+    #time-3, #icon-3, #temperature-3, #rain-3, #humidity-3, #wind-3, #description-3,
+    #date-3, #icon-3, #high-temp-3, #low-temp-3, #avg-wind-3, #humidity-3, #rain-3, #description-3 {
+        display: none !important;
     }
-    .forecast-header {
-        font-size: 16px; /* Slightly smaller header font size */
+
+    /* Adjust grid layout for smaller screens */
+    .forecast-container {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 4px;
     }
-    .forecast-item {
-        font-size: 12px; /* Slightly smaller item font size */
+
+    .icon img {
+        max-height: 15px; /* Adjust as needed */
+    }
+
+    .forecast-header, .forecast-item {
+        font-size: 5px; /* Adjust font size for even smaller screens */
     }
 }

@@ -4,6 +4,7 @@ body, html {
   height: 100%;
   color: #777;
   line-height: 1.8;
+  max-width: 100% !important;
 }
 
 /* Create a Parallax Effect */
@@ -57,5 +58,7 @@ body, html {
 .select{
   text-decoration: none;
 }
+
+
 
 }

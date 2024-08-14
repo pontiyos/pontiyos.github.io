@@ -282,13 +282,12 @@ function extractDailyWeatherSummary(weatherJSON) {
  * @param {Array<Object>} weatherArray - An array of objects containing weather data for each forecast item.
  * @return {string} The HTML string representing the current weather forecast.
  */
-
 function buildCurrentWeatherHtml(weatherArray) {
-    // Helper function to create a section of HTML
-    const createSection = (header, items, className) => {
-        let sectionHTML = `<div class="${className}">${header}</div>`;
-        items.forEach(item => {
-            sectionHTML += `<div class="${className}">${item}</div>`;
+    // Helper function to create a section of HTML with an id
+    const createSection = (header, items, className, idPrefix) => {
+        let sectionHTML = `<div class="${className}" id="${idPrefix}-header">${header}</div>`;
+        items.forEach((item, index) => {
+            sectionHTML += `<div class="${className}" id="${idPrefix}-${index}">${item}</div>`;
         });
         return sectionHTML;
     };
@@ -302,19 +301,21 @@ function buildCurrentWeatherHtml(weatherArray) {
     const winds = weatherArray.map(data => `${data.windSpeed} (${data.windDirection})`);
     const descriptions = weatherArray.map(data => data.description || 'No description');
 
-    // Build HTML
+    // Build HTML with IDs
     const weatherHTML = [
-        createSection('Time', times, 'forecast-header'),
-        createSection('Icon', icons, 'forecast-item icon'),
-        createSection('Temperature(℃)', temperatures, 'forecast-item temperature'),
-        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain'),
-        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity'),
-        createSection('<i class="fa fa-flag"></i> Wind (m/s)', winds, 'forecast-item wind'),
-        createSection('Description', descriptions, 'forecast-item description')
+        createSection('Time', times, 'forecast-header', 'time'),
+        createSection('Icon', icons, 'forecast-item icon', 'icon'),
+        createSection('Temperature(℃)', temperatures, 'forecast-item temperature', 'temperature'),
+        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain', 'rain'),
+        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity', 'humidity'),
+        createSection('<i class="fa fa-flag"></i> Wind (m/s)', winds, 'forecast-item wind', 'wind'),
+        createSection('Description', descriptions, 'forecast-item description', 'description')
     ].join('');
 
     return weatherHTML;
 }
+
+
 
 /**
  * Builds the HTML for a daily weather forecast.
@@ -322,7 +323,8 @@ function buildCurrentWeatherHtml(weatherArray) {
  * @param {Array} dailyWeatherArray - An array of objects containing daily weather data.
  * @return {string} The HTML string for the daily weather forecast.
  */
-function buildDaysWeatherHtml(dailyWeatherArray) {
+/**
+ function buildDaysWeatherHtml(dailyWeatherArray) {
     // Helper function to create a section of HTML
     const createSection = (header, items, className) => {
         let sectionHTML = `<div class="${className}">${header}</div>`;
@@ -356,6 +358,43 @@ function buildDaysWeatherHtml(dailyWeatherArray) {
 
     return weatherHTML;
 }
+*/
+
+function buildDaysWeatherHtml(dailyWeatherArray) {
+    // Helper function to create a section of HTML
+    const createSection = (header, items, className, idPrefix) => {
+        let sectionHTML = `<div class="${className}" id="${idPrefix}-header">${header}</div>`;
+        items.forEach((item, index) => {
+            sectionHTML += `<div class="${className}" id="${idPrefix}-${index}">${item}</div>`;
+        });
+        return sectionHTML;
+    };
+
+    // Extract data
+    const dates = dailyWeatherArray.map(data => data.date);
+    const icons = dailyWeatherArray.map(data => `<img src="${visualWeather(data.weatherCode || 'unknown')}" alt="${data.weatherCode || 'unknown'}">`);
+    const highTemps = dailyWeatherArray.map(data => `${data.highTemperature}℃`);
+    const lowTemps = dailyWeatherArray.map(data => `${data.lowTemperature}℃`);
+    const avgWinds = dailyWeatherArray.map(data => `${data.avgWindSpeed} m/s`);
+    const humidities = dailyWeatherArray.map(data => `${data.avgHumidity}%`);
+    const rains = dailyWeatherArray.map(data => `${data.totalRain} mm`);
+    const descriptions = dailyWeatherArray.map(data => data.description || 'No description');
+
+    // Build HTML with unique IDs for each section
+    const weatherHTML = [
+        createSection('Date', dates, 'forecast-header', 'date'),
+        createSection('Icon', icons, 'forecast-item icon', 'icon'),
+        createSection('High Temp (℃)', highTemps, 'forecast-item temperature', 'high-temp'),
+        createSection('Low Temp (℃)', lowTemps, 'forecast-item temperature', 'low-temp'),
+        createSection('<i class="fa fa-flag"></i> Avg Wind (m/s)', avgWinds, 'forecast-item wind', 'avg-wind'),
+        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity', 'humidity'),
+        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain', 'rain'),
+        createSection('Description', descriptions, 'forecast-item description', 'description')
+    ].join('');
+
+    return weatherHTML;
+}
+
 
 /**
  * Extracts and formats the time from the date string.
