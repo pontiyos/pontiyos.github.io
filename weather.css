@@ -23,45 +23,65 @@
     min-height: 800px;
   }
 
+/* Base styles for the forecast container and items */
 .forecast-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr); /* 1 for time + 7 for hours */
     gap: 0; /* No gap between items */
     padding: 10px;
     background-color: #f1f1f1 !important;
-  }
-  .forecast-header, .forecast-item {
+}
+.forecast-header, .forecast-item {
     text-align: center;
     padding: 10px;
     border-right: 1px solid #ddd; /* Adds separation between columns */
-  }
-  .forecast-header {
+}
+.forecast-header {
     background-color: #f1f1f1;
     font-weight: bold;
     border-bottom: 2px solid #ddd;
-  }
-  .forecast-header:last-child, .forecast-item:last-child {
+}
+.forecast-header:last-child, .forecast-item:last-child {
     border-right: none; /* Removes the border on the last column */
-  }
-  .forecast-item img {
+}
+.forecast-item img {
     max-height: 50px;
     vertical-align: middle;
-  }
-  .icon, .description, .rain, .humidity, .wind {
+}
+.icon, .description, .rain, .humidity, .wind {
     display: block;
-  }
-  .icon i {
+}
+.icon i {
     font-size: 24px;
     color: #333;
-  }
-  .description, .rain, .humidity, .wind {
+}
+.description, .rain, .humidity, .wind {
     font-size: 14px;
     color: #555;
-  }
-
+}
 
 @media only screen and (max-device-width: 1600px) {
     .mobile.weather-place{
         width:inherit;
+    }
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 767px) {
+    .forecast-container {
+        grid-template-columns: repeat(1, 1fr); /* Single column layout */
+    }
+    .forecast-header, .forecast-item {
+        border-right: none; /* Remove the border on mobile */
+        border-bottom: 1px solid #ddd; /* Add bottom border for separation */
+    }
+    .forecast-item img {
+        max-height: 40px; /* Adjust icon size for smaller screens */
+    }
+    .forecast-header {
+        font-size: 16px; /* Slightly smaller header font size */
+    }
+    .forecast-item {
+        font-size: 12px; /* Slightly smaller item font size */
     }
 }
