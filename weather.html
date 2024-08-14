@@ -45,56 +45,64 @@
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
-    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">CURRENT WEATHER </span>
+    <span class="w3-center w3-black w3-xlarge w3-wide w3-animate-opacity"> 
+      <h1 class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"> WEATHER </h1> 
+    </span>
     
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top">
-      <a id="current-weather" href="weather.html#cWeather" style="text-decoration: none;" > Current weather ... </a>
+      <a id="current-weather" href="weather.html#current-weather" style="text-decoration: none;" > Current weather </a>
     </div>
+
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top"> 
-      <a id="seven-weather" href="weather.html#7d" style="text-decoration: none;"> 7 days ... </a>
+      <a id="seven-weather" href="weather.html#commingWeek" style="text-decoration: none;"> Comming week </a>
     </div>
+        <!--
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top"> 
       <a id="nine-weather" href="weather.html#9d" style="text-decoration: none;" > 9 days ... </a>
     </div>
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top">
       <a id="other-weather" href="weather.html#otherLocation" style="text-decoration: none;"> Other locations ... </a>
     </div>
-    
+  -->
     
   </div>
 </div>
 
-<!-- Second Parallax Image with Certificates Text -->
-<div id="cWeather" class="bgimg-2 w3-display-container w3-opacity-min">
+
+<div id="current-weather" class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
-    <span class="w3-xxlarge w3-text-white w3-wide">Current weather</span>
+    <span class="w3-xxlarge w3-text-black w3-wide"><h1 class="w3-center">Current weather</h1></span>
 
-    
+    <div id="current-weather-container" class="forecast-container">
+
+    </div>
+
 
   </div>
 </div>
 
 <!-- Second Parallax Image with Certificates Text -->
-<div id="7d" class="bgimg-2 w3-display-container w3-opacity-min">
+ 
+<div id="current-weather" class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
     <span class="w3-xxlarge w3-text-white w3-wide">7 days</span>
+
+    <div id="comming-weather-container" class="forecast-container">
+
+    </div>
+
   </div>
 </div>
 
-<!-- Second Parallax Image with Certificates Text -->
-<div id="9d" class="bgimg-2 w3-display-container w3-opacity-min">
-  <div class="w3-display-middle">
-    <span class="w3-xxlarge w3-text-white w3-wide">9 days</span>
-  </div>
-</div>
 
 <!-- Second Parallax Image with Certificates Text -->
+<!--
 <div id="otherLocation" class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
     <span class="w3-xxlarge w3-text-white w3-wide">Other locations</span>
   </div>
 </div>
-
+-->
 
 
 

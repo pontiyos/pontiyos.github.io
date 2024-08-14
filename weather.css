@@ -11,6 +11,55 @@
     font-weight: 800;
 }
 
+.current-weather{
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    background-color: aliceblue !important;
+}
+
+.bgimg-2{
+    background-attachment: scroll;
+    min-height: 600px;
+  }
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* 1 for time + 7 for hours */
+    gap: 0; /* No gap between items */
+    padding: 10px;
+    background-color: #f1f1f1 !important;
+  }
+  .forecast-header, .forecast-item {
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #ddd; /* Adds separation between columns */
+  }
+  .forecast-header {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  .forecast-header:last-child, .forecast-item:last-child {
+    border-right: none; /* Removes the border on the last column */
+  }
+  .forecast-item img {
+    max-height: 50px;
+    vertical-align: middle;
+  }
+  .icon, .description, .rain, .humidity, .wind {
+    display: block;
+  }
+  .icon i {
+    font-size: 24px;
+    color: #333;
+  }
+  .description, .rain, .humidity, .wind {
+    font-size: 14px;
+    color: #555;
+  }
+
+
 @media only screen and (max-device-width: 1600px) {
     .mobile.weather-place{
         width:inherit;
