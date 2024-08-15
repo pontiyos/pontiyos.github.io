@@ -20,7 +20,7 @@
 
 .bgimg-2 {
     background-attachment: fixed;
-    min-height: 600px;
+    min-height: 700px;
 }
 
 .forecast-container {
@@ -79,6 +79,15 @@
         font-size: 8px; /* Adjust font size for smaller screens */
     }
 
+    .bgimg-2 {
+        background-attachment: fixed;
+        min-height: 500px;
+    }   
+
+    #current-weather-header, #coming-weather-header {
+        font-size: 20px;
+    }
+
 }
 
 /* Media query for screens smaller than 380px */
@@ -104,4 +113,9 @@
     .forecast-header, .forecast-item {
         font-size: 5px; /* Adjust font size for even smaller screens */
     }
+
+    #current-weather-header, #coming-weather-header {
+        font-size: 18px;
+    }    
+
 }
