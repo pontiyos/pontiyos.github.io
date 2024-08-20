@@ -1,11 +1,229 @@
+//This should be mmoved to DB or other JS
+
+const cities = {
+    tokyo: {
+      name: "Tokyo",
+      latitude: 35.682839,
+      longitude: 139.759455,
+      country: "Japan"
+    },
+    delhi: {
+      name: "Delhi",
+      latitude: 28.704060,
+      longitude: 77.102493,
+      country: "India"
+    },
+    shanghai: {
+      name: "Shanghai",
+      latitude: 31.230391,
+      longitude: 121.473701,
+      country: "China"
+    },
+    são_paulo: {
+      name: "São Paulo",
+      latitude: -23.550520,
+      longitude: -46.633308,
+      country: "Brazil"
+    },
+    mexico_city: {
+      name: "Mexico City",
+      latitude: 19.432608,
+      longitude: -99.133209,
+      country: "Mexico"
+    },
+    cairo: {
+      name: "Cairo",
+      latitude: 30.044420,
+      longitude: 31.235712,
+      country: "Egypt"
+    },
+    dhaka: {
+      name: "Dhaka",
+      latitude: 23.810331,
+      longitude: 90.412521,
+      country: "Bangladesh"
+    },
+    mumbai: {
+      name: "Mumbai",
+      latitude: 19.076090,
+      longitude: 72.877426,
+      country: "India"
+    },
+    beijing: {
+      name: "Beijing",
+      latitude: 39.904202,
+      longitude: 116.407394,
+      country: "China"
+    },
+    osaka: {
+      name: "Osaka",
+      latitude: 34.693737,
+      longitude: 135.502167,
+      country: "Japan"
+    },
+    karachi: {
+      name: "Karachi",
+      latitude: 24.860735,
+      longitude: 67.001137,
+      country: "Pakistan"
+    },
+    chongqing: {
+      name: "Chongqing",
+      latitude: 29.563761,
+      longitude: 106.550464,
+      country: "China"
+    },
+    istanbul: {
+      name: "Istanbul",
+      latitude: 41.008240,
+      longitude: 28.978359,
+      country: "Turkey"
+    },
+    buenos_aires: {
+      name: "Buenos Aires",
+      latitude: -34.603684,
+      longitude: -58.381559,
+      country: "Argentina"
+    },
+    kolkata: {
+      name: "Kolkata",
+      latitude: 22.572646,
+      longitude: 88.363895,
+      country: "India"
+    },
+    lagos: {
+      name: "Lagos",
+      latitude: 6.524379,
+      longitude: 3.379206,
+      country: "Nigeria"
+    },
+    kinshasa: {
+      name: "Kinshasa",
+      latitude: -4.441931,
+      longitude: 15.266293,
+      country: "Democratic Republic of the Congo"
+    },
+    manila: {
+      name: "Manila",
+      latitude: 14.599512,
+      longitude: 120.984222,
+      country: "Philippines"
+    },
+    tianjin: {
+      name: "Tianjin",
+      latitude: 39.343357,
+      longitude: 117.361649,
+      country: "China"
+    },
+    rio_de_janeiro: {
+      name: "Rio de Janeiro",
+      latitude: -22.906847,
+      longitude: -43.172897,
+      country: "Brazil"
+    },
+    stockholm: {
+      name: "Stockholm",
+      latitude: 59.329323,
+      longitude: 18.068581,
+      country: "Sweden"
+    },
+    copenhagen: {
+      name: "Copenhagen",
+      latitude: 55.676098,
+      longitude: 12.568337,
+      country: "Denmark"
+    },
+    malmö: {
+      name: "Malmö",
+      latitude: 55.605874,
+      longitude: 13.000731,
+      country: "Sweden"
+    },
+    helsingborg: {
+      name: "Helsingborg",
+      latitude: 56.046467,
+      longitude: 12.694512,
+      country: "Sweden"
+    },
+    göteborg: {
+      name: "Göteborg",
+      latitude: 57.708870,
+      longitude: 11.974560,
+      country: "Sweden"
+    },
+    // Added cities with partial matches
+    new_york: {
+      name: "New York",
+      latitude: 40.712776,
+      longitude: -74.005974,
+      country: "United States"
+    },
+    mexico_city: {
+      name: "Mexico City",
+      latitude: 19.432608,
+      longitude: -99.133209,
+      country: "Mexico"
+    },
+    new_delhi: {
+      name: "New Delhi",
+      latitude: 28.613939,
+      longitude: 77.209021,
+      country: "India"
+    },
+    kansas_city: {
+      name: "Kansas City",
+      latitude: 39.099728,
+      longitude: -94.578568,
+      country: "United States"
+    },
+    los_angeles: {
+      name: "Los Angeles",
+      latitude: 34.052235,
+      longitude: -118.243683,
+      country: "United States"
+    },
+    kyoto: {
+      name: "Kyoto",
+      latitude: 35.011636,
+      longitude: 135.768029,
+      country: "Japan"
+    },
+    hagen: {
+        name: "Hagen",
+        latitude: 51.367077,
+        longitude: 7.463284,
+        country: "Germany"
+    },
+    la_paz: {
+      name: "La Paz",
+      latitude: -16.500000,
+      longitude: -68.150002,
+      country: "Bolivia"
+    }
+};
+
+
+/**START OF ACCTUAL WEATHER */
+
+let searchTimeout;
 /**
  * Retrieves the user's current location using geolocation API.
  */
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(function(position) {
+            showPosition(position);
+
+            // Display the weather sections and buttons now that we have the location
+            document.getElementById('current-weather').style.display = 'block';
+            document.getElementById('coming-weather').style.display = 'block';
+            document.getElementById('current-weather-btn-wrapper').style.display = 'block';
+            document.getElementById('seven-weather-btn-wrapper').style.display = 'block';
+        });
     } else {
         console.log("Geolocation is not supported by this browser");
+        // You can also show a message or fallback UI if geolocation is not supported
+        alert("Geolocation isn't supported");
     }
 }
 
@@ -38,7 +256,60 @@ function showPosition(position) {
         });
     });
 }
+function fetchWeatherData(lat, lon, cityName) {
+    // Display the weather sections and buttons when fetching data manually
+    document.getElementById('current-weather').style.display = 'block';
+    document.getElementById('coming-weather').style.display = 'block';
+    document.getElementById('current-weather-btn-wrapper').style.display = 'block';
+    document.getElementById('seven-weather-btn-wrapper').style.display = 'block';
 
+    // Displays the user's selected location and fetches weather data
+    displayLocation(lat, lon, function () {
+        var resp = JSON.parse(this.responseText);
+
+        // Use the cityName provided or fallback to the detected city name
+        const userLocation = cityName || resp.address.city;
+
+        // Update the UI with the city name
+        updateWeatherSections(userLocation);
+
+        // Call getWeather with callbacks for weatherInfo and renderCurrentWeatherBody
+        getWeather(lat, lon, function() {
+            weatherInfo(weatherObj, userLocation);
+        }, function() {
+            renderCurrentWeatherBody(weatherObj);
+            renderCommingWeatherBody(weatherObj);
+        });
+    });
+}
+
+
+function updateWeatherSections(cityName) {
+    // Update the text of the headers and buttons with the selected city name
+    const currentWeatherHeader = document.getElementById('current-weather-header');
+    const comingWeatherHeader = document.getElementById('coming-weather-header');
+    const currentWeatherLink = document.querySelector('a[href="weather.html#current-weather-container"]');
+    const comingWeekLink = document.querySelector('a[href="weather.html#comming-weather-container"]');
+
+    if (currentWeatherHeader) {
+        currentWeatherHeader.textContent = `Current Weather in ${cityName}`;
+    }
+
+    if (comingWeatherHeader) {
+        comingWeatherHeader.textContent = `Coming Week in ${cityName}`;
+    }
+
+    if (currentWeatherLink) {
+        currentWeatherLink.textContent = `Current Weather in ${cityName}`;
+    }
+
+    if (comingWeekLink) {
+        comingWeekLink.textContent = `Coming Week in ${cityName}`;
+    }
+
+    // Scroll to the current weather section
+    document.getElementById("current-weather").scrollIntoView({ behavior: "smooth" });
+}
 
 /**
  * Fetches weather data from a weather API based on latitude and longitude.
@@ -274,7 +545,96 @@ function extractDailyWeatherSummary(weatherJSON) {
     return dailyWeatherArray;
 }
 
+function searchLocation() {
+    let customLocation = document.getElementById('custom-weather-input').value;
+    console.log("customLocation = " + customLocation);
 
+    // Cancel the current timeout and start a new one
+    clearTimeout(searchTimeout);
+
+    // Set a new timeout for 3 seconds
+    searchTimeout = setTimeout(() => {
+        handlePartialSearch(customLocation);
+    }, 1000);
+}
+
+function searchWeatherLocation() {
+    // Get the input value
+    let customLocation = document.getElementById('custom-weather-input').value;
+    
+    // Cancel any ongoing timeout to prevent the partial search from being triggered
+    clearTimeout(searchTimeout);
+
+    // Check if the input length is 3 characters or more
+    if (customLocation.length >= 3) {
+      // Do something with the input, for now, we'll just log it
+      console.log("customLocation = " + customLocation);
+    }
+  }
+
+  function handlePartialSearch(customLocation) {
+    console.log("Handling search for location: " + customLocation);
+
+    // Filter cities that start with the entered characters (case insensitive)
+    const matchingCities = Object.values(cities).filter(city => 
+        city.name.toLowerCase().includes(customLocation.toLowerCase())
+    );
+
+    console.log("Matching cities:", matchingCities);
+    
+    // Call displaySearchResults with the matching cities array
+    displaySearchResults(matchingCities);
+}
+
+function displaySearchResults(results) {
+    let tempHTML = "";
+
+    for (let i = 0; i < results.length; i++) {
+        const cityName = results[i].name;
+        const cityId = "city-" + i; // Create a unique ID for each city button
+
+        tempHTML += `<button id="${cityId}" class='location-select' onclick='getWeatherForLocation("${cityName}")'>${cityName}</button>`;
+    }
+/**
+    // Additional static buttons (e.g., for specific cities)
+    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Stockholm\")'>Stockholm</button>";
+    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"New York\")'>New York</button> <br>";
+    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Helsingborg\")'>Helsingborg</button>";
+    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Köpenhamn\")'>Köpenhamn</button>";    
+    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Göteborg\")'>Göteborg</button>";
+*/
+    const displayArea = document.getElementById("search-display");
+    if (displayArea && results.length > 0) {  
+        displayArea.style.display = "block"; 
+        displayArea.innerHTML = tempHTML;
+    } else {
+        displayArea.style.display = "none";
+    }
+}
+
+function getWeatherForLocation(locationName) {
+    const selectedCity = Object.values(cities).find(city => city.name === locationName);
+    
+    if (selectedCity) {
+        const lat = selectedCity.latitude;
+        const lon = selectedCity.longitude;
+
+        console.log(`Fetching weather for: ${locationName} (Lat: ${lat}, Lon: ${lon})`);
+        fetchWeatherData(lat, lon, locationName);
+    } else {
+        console.log("City not found!");
+    }
+}
+
+function getLocationsMatchingPartialInput() {
+    /**
+     * Long term goal
+     * Check aginst backend if we have looked for that before - ideally in cache but backend is ok
+     * If yes return list based on that else get from API based on the partial string
+     * Ensure that we have a maximum of 10 results as well as a slight delay so that we don't ping backend/API too often
+     * For now we will just return hardcoded list and if not in the list we will check with API
+     */
+}
 
 /**
  * Builds the HTML for the current weather forecast based on the provided weather data array.
@@ -314,51 +674,6 @@ function buildCurrentWeatherHtml(weatherArray) {
 
     return weatherHTML;
 }
-
-
-
-/**
- * Builds the HTML for a daily weather forecast.
- *
- * @param {Array} dailyWeatherArray - An array of objects containing daily weather data.
- * @return {string} The HTML string for the daily weather forecast.
- */
-/**
- function buildDaysWeatherHtml(dailyWeatherArray) {
-    // Helper function to create a section of HTML
-    const createSection = (header, items, className) => {
-        let sectionHTML = `<div class="${className}">${header}</div>`;
-        items.forEach(item => {
-            sectionHTML += `<div class="${className}">${item}</div>`;
-        });
-        return sectionHTML;
-    };
-
-    // Extract data
-    const dates = dailyWeatherArray.map(data => data.date);
-    const icons = dailyWeatherArray.map(data => `<img src="${visualWeather(data.weatherCode || 'unknown')}" alt="${data.weatherCode || 'unknown'}">`);
-    const highTemps = dailyWeatherArray.map(data => `${data.highTemperature}℃`);
-    const lowTemps = dailyWeatherArray.map(data => `${data.lowTemperature}℃`);
-    const avgWinds = dailyWeatherArray.map(data => `${data.avgWindSpeed} m/s`);
-    const humidities = dailyWeatherArray.map(data => `${data.avgHumidity}%`);
-    const rains = dailyWeatherArray.map(data => `${data.totalRain} mm`);
-    const descriptions = dailyWeatherArray.map(data => data.description || 'No description');
-
-    // Build HTML
-    const weatherHTML = [
-        createSection('Date', dates, 'forecast-header'),
-        createSection('Icon', icons, 'forecast-item icon'),
-        createSection('High Temp (℃)', highTemps, 'forecast-item temperature'),
-        createSection('Low Temp (℃)', lowTemps, 'forecast-item temperature'),
-        createSection('<i class="fa fa-flag"></i> Avg Wind (m/s)', avgWinds, 'forecast-item wind'),
-        createSection('<i class="fa fa-tint w3-text-blue"></i> Humidity (%)', humidities, 'forecast-item humidity'),
-        createSection('<i class="fa fa-tint"></i> Rain (mm)', rains, 'forecast-item rain'),
-        createSection('Description', descriptions, 'forecast-item description')
-    ].join('');
-
-    return weatherHTML;
-}
-*/
 
 function buildDaysWeatherHtml(dailyWeatherArray) {
     // Helper function to create a section of HTML
@@ -453,3 +768,7 @@ function displayWeatherForLocation() {
      renderCurrentWeatherBody(weatherObj);
     }
 }
+
+
+  
+  

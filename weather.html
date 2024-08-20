@@ -26,43 +26,49 @@
       <h1 class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"> WEATHER </h1> 
     </span>
     
-    <div class="weather-select w3-center w3-padding w3-white w3-margin-top">
-      <a id="current-weather" href="weather.html#current-weather-container" style="text-decoration: none;" > Current weather </a>
+    <div class="weather-select w3-center w3-padding w3-white w3-margin-top" style="display: none;" id="current-weather-btn-wrapper">
+      <a id="current-weather-button" href="weather.html#current-weather-container" style="text-decoration: none;" > Current weather </a>
     </div>
 
-    <div class="weather-select w3-center w3-padding w3-white w3-margin-top"> 
-      <a id="seven-weather" href="weather.html#comming-weather-container" style="text-decoration: none;"> Comming week </a>
+    <div class="weather-select w3-center w3-padding w3-white w3-margin-top" style="display: none;" id="seven-weather-btn-wrapper"> 
+      <a id="seven-weather-button" href="weather.html#comming-weather-container" style="text-decoration: none;"> Comming week </a>
     </div>
-        <!--
+  <!--  
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top">
-      <a id="other-weather" href="weather.html#otherLocation" style="text-decoration: none;"> Other locations ... </a>
+      <input type="text" id="custom-weather-input" placeholder="Enter location" on-input="displayWeatherForLocation()"> </input>
+      <a id="other-weather" href="weather.html#otherLocation" style="text-decoration: none;"> Search location </a>
     </div>
   -->
-    
+
+  <div class="weather-select w3-center w3-padding w3-white w3-margin-top">
+    <input type="text" id="custom-weather-input" placeholder="Enter location" oninput="searchLocation()"> 
+    <button id="other-weather" style="text-decoration: none; display: none;" onclick="searchWeatherLocation()"> Search location </button>
   </div>
-</div>
 
-
-<div id="current-weather" class="bgimg-2 w3-display-container w3-opacity-min">
-  <div class="w3-display-middle">
-    <span id="current-weather-span" class="w3-xxlarge w3-text-black w3-wide"><h1 id="current-weather-header" class="w3-center">Current weather</h1></span>
-    <div id="current-weather-container-wrapper">
-      <div id="current-weather-container" class="forecast-container">
-      </div>
-    </div>
-
-
-  </div>
-</div>
-
- 
-<div id="coming-weather" class="bgimg-2 w3-display-container w3-opacity-min">
-  <div id="comming-weather-span" class="w3-display-middle forecast-wrapper">
-    <span class="w3-xxlarge w3-text-black w3-wide"><h1 id="coming-weather-header" class="w3-center">Comming Week</h1></span>
-
-      <div id="comming-weather-container" class="forecast-container">
-    </div>
+  <div id="search-display" class="w3-center w3-padding w3-white w3-margin-top" style="display: none;"></div>
   
+  
+  </div>
+</div>
+
+
+<div id="current-weather" class="bgimg-2 w3-display-container w3-opacity-min" style="display: none;">
+  <div class="w3-display-middle">
+    <span id="current-weather-span" class="w3-xxlarge w3-text-black w3-wide">
+      <h1 id="current-weather-header" class="w3-center">Current Weather</h1>
+    </span>
+    <!-- <div id="current-weather-container-wrapper">-->
+      <div id="current-weather-container" class="forecast-container"></div>
+    <!--</div>-->
+  </div>
+</div>
+
+<div id="coming-weather" class="bgimg-2 w3-display-container w3-opacity-min" style="display: none;">
+  <div id="comming-weather-span" class="w3-display-middle forecast-wrapper">
+    <span class="w3-xxlarge w3-text-black w3-wide">
+      <h1 id="coming-weather-header" class="w3-center">Coming Week</h1>
+    </span>
+    <div id="comming-weather-container" class="forecast-container"></div>
   </div>
 </div>
 
