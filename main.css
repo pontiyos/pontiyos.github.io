@@ -35,11 +35,22 @@ body, html {
 
 .weather-img{
   width: 1.8em;
+  height: auto;
 }
 
-#main-weather{
+#main-weather {
   float: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
   background-color: transparent !important;
+  border-radius: 0px;
+  margin-bottom: 2px;
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+  word-wrap: break-word; /* Enable breaking long words */
+  word-break: break-word; /* Enable word breaking */
+  overflow-wrap: break-word; /* Ensure word breaking in modern browsers */
 }
 
 .w3-wide {letter-spacing: 10px;}

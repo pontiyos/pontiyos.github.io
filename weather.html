@@ -16,7 +16,7 @@
 <script type="text/javascript" src="js\loadComponents.js" defer></script>
 </head>
 
-  <body onload="displayWeatherForLocation()">
+  <body id="main-body" onload="displayWeatherForLocation()">
     <div id="navbar"></div>
 
 <!-- First Parallax Image with Logo Text -->
@@ -27,11 +27,11 @@
     </span>
     
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top" style="display: none;" id="current-weather-btn-wrapper">
-      <a id="current-weather-button" href="weather.html#current-weather-container" style="text-decoration: none;" > Current weather </a>
+      <a id="current-weather-button" href="weather.html#current-weather-container" style="text-decoration: none;" > Current weather for your location </a>
     </div>
 
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top" style="display: none;" id="seven-weather-btn-wrapper"> 
-      <a id="seven-weather-button" href="weather.html#comming-weather-container" style="text-decoration: none;"> Comming week </a>
+      <a id="seven-weather-button" href="weather.html#comming-weather-container" style="text-decoration: none;"> Comming weeks weather for your location </a>
     </div>
   <!--  
     <div class="weather-select w3-center w3-padding w3-white w3-margin-top">

@@ -373,6 +373,36 @@ function displayLocation(latitude, longitude, callback) {
         .catch(error => console.error('Error fetching location data:', error));
 }
 
+let autoCompleteResults = [];
+
+
+function autoCompleteLocation(locationString) {
+    const options = { method: 'GET', headers: { accept: 'application/json' } };
+    const apiKey = 'pk.ace7d9c9f893b1066a483ef3e05a2280';
+    const url = `https://us1.locationiq.com/v1/autocomplete?q=${locationString}&key=${apiKey}`;
+
+    return fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            console.log("API response:", data);
+
+            // Map the API response to the format expected by displaySearchResults
+            autoCompleteResults = data.map(location => ({
+                name: location.display_name,
+                latitude: location.lat,
+                longitude: location.lon,
+                country: location.address.country || "Unknown Country"  // Use a default value if country is missing
+            }));
+
+            return autoCompleteResults;
+        })
+        .catch(err => {
+            console.error('Error fetching autocomplete data:', err);
+            return [];
+        });
+}
+
+
 /**
  * Processes weather data and updates the UI with weather information.
  * @param {object} myJSON - Weather data object.
@@ -552,10 +582,17 @@ function searchLocation() {
     // Cancel the current timeout and start a new one
     clearTimeout(searchTimeout);
 
-    // Set a new timeout for 3 seconds
-    searchTimeout = setTimeout(() => {
-        handlePartialSearch(customLocation);
-    }, 1000);
+    // Hide the results area if the search input is empty
+    const searchDisplay = document.getElementById('search-display');
+    if (customLocation.trim() === '') {
+        searchDisplay.style.display = 'none'; // Hide the search results area
+    } else {
+        searchDisplay.style.display = 'block'; // Show the search results area
+        // Set a new timeout for 1 second (or adjust as needed)
+        searchTimeout = setTimeout(() => {
+            handlePartialSearch(customLocation);
+        }, 1000);
+    }
 }
 
 function searchWeatherLocation() {
@@ -572,49 +609,55 @@ function searchWeatherLocation() {
     }
   }
 
-  function handlePartialSearch(customLocation) {
+  async function handlePartialSearch(customLocation) {
     console.log("Handling search for location: " + customLocation);
 
-    // Filter cities that start with the entered characters (case insensitive)
+    // Filter cities that contain the entered characters (case insensitive)
     const matchingCities = Object.values(cities).filter(city => 
         city.name.toLowerCase().includes(customLocation.toLowerCase())
     );
 
-    console.log("Matching cities:", matchingCities);
-    
-    // Call displaySearchResults with the matching cities array
-    displaySearchResults(matchingCities);
+    if (matchingCities.length > 0) {
+        // If we find matching cities locally, display them
+        console.log("Matching cities:", matchingCities);
+        displaySearchResults(matchingCities);
+    } else {
+        // If no matches are found locally, call the autocomplete API
+        console.log("No matching cities found locally. Fetching from API...");
+        const apiResults = await autoCompleteLocation(customLocation);
+        displaySearchResults(apiResults);
+    }
 }
+
 
 function displaySearchResults(results) {
-    let tempHTML = "";
+    const searchDisplay = document.getElementById('search-display');
+    searchDisplay.innerHTML = ''; // Clear any existing results
 
-    for (let i = 0; i < results.length; i++) {
-        const cityName = results[i].name;
-        const cityId = "city-" + i; // Create a unique ID for each city button
+    results.forEach((result, index) => {
+        const button = document.createElement('button');
+        button.id = `city-${index}`;
+        button.className = 'location-select weather-select';  // Apply the 'weather-select' class
+        button.innerHTML = result.name;
+        button.onclick = () => getWeatherForLocation(result.name);
+        
+        searchDisplay.appendChild(button);
+    });
 
-        tempHTML += `<button id="${cityId}" class='location-select' onclick='getWeatherForLocation("${cityName}")'>${cityName}</button>`;
-    }
-/**
-    // Additional static buttons (e.g., for specific cities)
-    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Stockholm\")'>Stockholm</button>";
-    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"New York\")'>New York</button> <br>";
-    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Helsingborg\")'>Helsingborg</button>";
-    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Köpenhamn\")'>Köpenhamn</button>";    
-    tempHTML += "<button class='location-select' onclick='getWeatherForLocation(\"Göteborg\")'>Göteborg</button>";
-*/
-    const displayArea = document.getElementById("search-display");
-    if (displayArea && results.length > 0) {  
-        displayArea.style.display = "block"; 
-        displayArea.innerHTML = tempHTML;
-    } else {
-        displayArea.style.display = "none";
-    }
+    searchDisplay.style.display = 'grid';  // Ensure display is grid
 }
 
+
+
 function getWeatherForLocation(locationName) {
-    const selectedCity = Object.values(cities).find(city => city.name === locationName);
-    
+    // Search in the cities array first
+    let selectedCity = Object.values(cities).find(city => city.name === locationName);
+
+    // If not found in cities, search in the autoCompleteResults array
+    if (!selectedCity) {
+        selectedCity = autoCompleteResults.find(city => city.name === locationName);
+    }
+
     if (selectedCity) {
         const lat = selectedCity.latitude;
         const lon = selectedCity.longitude;
@@ -625,6 +668,7 @@ function getWeatherForLocation(locationName) {
         console.log("City not found!");
     }
 }
+
 
 function getLocationsMatchingPartialInput() {
     /**

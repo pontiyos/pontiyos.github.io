@@ -119,3 +119,53 @@
     }    
 
 }
+
+#search-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller min width for more columns */
+    gap: 8px; /* Space between buttons */
+    max-width: 100%; /* Ensure it respects the width of the parent container */
+    margin-top: 10px;
+}
+
+.weather-select {
+    cursor: pointer;
+    border-radius: 0.4em;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Reduced letter spacing */
+    padding: 8px; /* Smaller padding */
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    text-align: left;
+    width: 100%; /* Full width within grid cell */
+    font-size: 12px; /* Smaller font size */
+    word-wrap: break-word; /* Break words that are too long */
+    overflow-wrap: break-word; /* Ensures long words break properly */
+    white-space: normal; /* Allows text to wrap onto multiple lines */
+    line-height: 1.2; /* Adjust line height for readability */
+}
+
+.weather-select:hover {
+    box-shadow: rgba(50, 50, 93, 0.7) 0px 50px 100px -20px, rgba(0, 0, 0, 0.95) 0px 30px 60px -30px, rgba(10, 37, 64, 0.8) 0px -2px 6px 0px inset;
+    font-weight: 700;
+    background-color: #ddd;
+}
+
+.current-weather-button, .current-weather-btn-wrapper, .seven-weather-btn-wrapper, .seven-weather-button{
+    word-wrap: break-word; /* Break words that are too long */
+    overflow-wrap: break-word; /* Ensures long words break properly */
+    white-space: normal; /* Allows text to wrap onto multiple lines */
+}
+
+
+@media only screen and (max-width: 600px) {
+    #search-display {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust for smaller screens */
+    }
+
+    .weather-select {
+        font-size: 10px; /* Even smaller font size for very small screens */
+        padding: 6px; /* Reduce padding on smaller screens */
+    }
+}
+
