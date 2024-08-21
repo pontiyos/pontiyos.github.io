@@ -361,7 +361,9 @@ function getWeather(lat, lon, weatherCallback, renderCallback) {
  * @param {function} callback - Callback function to be executed after receiving location data.
  */
 function displayLocation(latitude, longitude, callback) {
-    const url = `https://us1.locationiq.com/v1/reverse.php?key=pk.ace7d9c9f893b1066a483ef3e05a2280&lat=${latitude}&lon=${longitude}&format=json`;
+    const apiKey = 'pk.ace7d9c9f893b1066a483ef3e05a2280'; // Use your actual API key
+    const acceptLanguage = 'en';
+    const url = `https://us1.locationiq.com/v1/reverse.php?key=${apiKey}&lat=${latitude}&lon=${longitude}&format=json&accept-language=${acceptLanguage}`;
     
     fetch(url)
         .then(response => response.json())
@@ -378,8 +380,11 @@ let autoCompleteResults = [];
 
 function autoCompleteLocation(locationString) {
     const options = { method: 'GET', headers: { accept: 'application/json' } };
-    const apiKey = 'pk.ace7d9c9f893b1066a483ef3e05a2280';
-    const url = `https://us1.locationiq.com/v1/autocomplete?q=${locationString}&key=${apiKey}`;
+    const apiKey = 'pk.ace7d9c9f893b1066a483ef3e05a2280'; // Use your actual API key
+    const acceptLanguage = 'en';
+    const encodedLocationString = encodeURIComponent(locationString);
+    const url = `https://us1.locationiq.com/v1/autocomplete?q=${encodedLocationString}&key=${apiKey}&accept-language=${acceptLanguage}`;
+
 
     return fetch(url, options)
         .then(response => response.json())
