@@ -205,6 +205,11 @@ const cities = {
 
 /**START OF ACCTUAL WEATHER */
 
+var script = document.createElement('script');
+script.src = "https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js";
+document.head.appendChild(script);
+
+
 let searchTimeout;
 /**
  * Retrieves the user's current location using geolocation API.
@@ -734,8 +739,13 @@ function buildDaysWeatherHtml(dailyWeatherArray) {
         return sectionHTML;
     };
 
-    // Extract data
-    const dates = dailyWeatherArray.map(data => data.date);
+    // Extract data and include day of the week with a new line before the date
+    const dates = dailyWeatherArray.map(data => {
+        const formattedDate = moment(data.date).format('YYYY-MM-DD'); // Format date as needed
+        const dayOfWeek = moment(data.date).format('dddd'); // Get the day of the week (e.g., Monday, Tuesday)
+        return `${dayOfWeek}<br>(${formattedDate})`; // Combine day and date with a line break
+    });
+
     const icons = dailyWeatherArray.map(data => `<img src="${visualWeather(data.weatherCode || 'unknown')}" alt="${data.weatherCode || 'unknown'}">`);
     const highTemps = dailyWeatherArray.map(data => `${data.highTemperature}℃`);
     const lowTemps = dailyWeatherArray.map(data => `${data.lowTemperature}℃`);
@@ -758,6 +768,7 @@ function buildDaysWeatherHtml(dailyWeatherArray) {
 
     return weatherHTML;
 }
+
 
 
 /**

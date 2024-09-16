@@ -93,7 +93,6 @@
 /* Media query for screens smaller than 380px */
 @media only screen and (max-width: 380px) {
 
-
     /* Hide additional items if necessary */
     #time-3, #icon-3, #temperature-3, #rain-3, #humidity-3, #wind-3, #description-3,
     #date-3, #icon-3, #high-temp-3, #low-temp-3, #avg-wind-3, #humidity-3, #rain-3, #description-3 {
@@ -118,6 +117,17 @@
         font-size: 18px;
     }    
 
+    #search-display {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Adjust further for very small screens */
+        overflow-x: auto; /* Ensure scrolling is enabled on small screens */
+    }
+
+    .weather-select {
+        font-size: 8px; /* Further reduce font size */
+        padding: 4px; /* Reduce padding */
+        min-width: 100px; /* Ensure buttons have a minimum width */
+    }
+
 }
 
 #search-display {
@@ -126,6 +136,8 @@
     gap: 8px; /* Space between buttons */
     max-width: 100%; /* Ensure it respects the width of the parent container */
     margin-top: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping, keep buttons in one line */
 }
 
 .weather-select {
@@ -161,11 +173,27 @@
 @media only screen and (max-width: 600px) {
     #search-display {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust for smaller screens */
+        overflow-x: auto; /* Ensure scrolling is enabled on small screens */
     }
 
     .weather-select {
         font-size: 10px; /* Even smaller font size for very small screens */
         padding: 6px; /* Reduce padding on smaller screens */
+        min-width: 120px; /* Ensure buttons have a minimum width for scrolling */
     }
 }
 
+/* Additional Adjustment */
+#search-display::-webkit-scrollbar {
+    width: 8px; /* Optional: Adjust scrollbar width */
+    height: 8px; /* Optional: Adjust scrollbar height */
+}
+
+#search-display::-webkit-scrollbar-thumb {
+    background-color: #888; /* Optional: Color of the scrollbar thumb */
+    border-radius: 4px; /* Optional: Rounded corners for scrollbar */
+}
+
+#search-display::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Optional: Darker color on hover */
+}
