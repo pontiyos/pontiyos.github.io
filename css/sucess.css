@@ -1,0 +1,94 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  /* Flexbox container */
+  #image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Creates a grid with 4 equal columns */
+    gap: 5px; /* Reduced space between grid items */
+    padding: 20px;
+  }
+  
+  /* Flexbox items */
+  .grid-item {
+    position: relative;
+    overflow: hidden; /* Ensures images do not overflow the grid item */
+    border-radius: 8px; /* Optional: round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for the images */
+  }
+  
+  /* Image styles */
+  .grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Overlay styles */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    font-size: 1.5em; /* Adjust font size as needed */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.3s; /* Fade-in effect */
+  }
+  
+  /* Show overlay on hover */
+  .grid-item:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
+  }
+  
+  /* Large image */
+  .large {
+    grid-column: span 2; /* Takes 2 columns */
+    grid-row: span 2; /* Takes 2 rows */
+    height: 70%; /* Set height for the large image */
+  }
+  
+  /* Small image */
+  .small {
+    height: 90%; /* Set height for smaller images */
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    #image-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+  
+    .large {
+      grid-column: span 2; /* Large image spans 2 columns on smaller screens */
+      grid-row: span 1; /* Takes 1 row */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #image-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 column on mobile */
+    }
+  
+    .large {
+      grid-column: span 1; /* Large image spans 1 column on mobile */
+      grid-row: span 1; /* Takes 1 row */
+    }
+  }
+  

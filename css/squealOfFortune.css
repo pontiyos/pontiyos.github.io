@@ -1,0 +1,149 @@
+:root {
+    --background-image: url('../img/Quiz/cheers.png'); /* Background image */
+    --border-color: #333; /* Consistent border color */
+    --pointer-color: #333; /* Color of the pointer */
+    --button-color: #942ee8; /* Spin button color */
+    --popup-background: white; /* Popup background color (will be overridden by wheel color) */
+    --confetti-color: red; /* Default confetti color */
+    --popup-shadow-color: rgba(0, 0, 0, 0.2); /* Popup shadow */
+}
+
+/* Body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: var(--background-image) no-repeat center center fixed;  /* Use CSS variable */
+    background-size: cover;
+}
+
+/* Wheel styling */
+#wheel {
+    width: 40vw; /* Wheel size */
+    height: 40vw;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Spin button styling */
+#spin-btn {
+    position: absolute;
+    /*top: calc(50vh + 15vw + 30px);*/
+    top: 48%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--button-color); /* Use CSS variable */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup styling */
+#popup {
+    position: absolute;
+    top: 24%;
+    left: 40%;
+    transform: translate(-50%, -50%); /* Center the popup horizontally and vertically */
+    background-color: var(--popup-background); /* Color will change dynamically */
+    padding: 4px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--popup-shadow-color);
+    display: none;
+    perspective: 1000px; /* For a 3D look */
+    transform-style: preserve-3d;
+    transform: rotateX(5deg); /* Slight tilt for 3D effect */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+/*
+#popup:hover {
+    transform: rotateX(0deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+    */
+
+#close-popup {
+    position: absolute;
+    top: 5px; /* Adjust to position it inside the image */
+    right: 5px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #666; /* Adjust color */
+    z-index: 10; /* Ensure the "X" is on top of the image */
+    background-color: rgba(255, 255, 255, 0.8); /* Slight background to make the "X" visible */
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+#popup img {
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+    max-width: 25em;
+    width: 100%; /* Make sure the image takes full width */
+    height: auto;
+    border-top: 2px solid var(--border-color); /* Thin border on top */
+    border-left: 2px solid var(--border-color); /* Thin border on left */
+    border-right: 2px solid var(--border-color); /* Thin border on right */
+}
+
+#popup p {
+    display: block;
+    margin: 15px auto 0; /* Ensure text appears below the image with margin on top */
+    font-size: 1.8em;
+    line-height: 180%;
+    font-weight: 700;
+    color: black;
+    text-align: center; /* Center the text */
+    max-width: 90%; /* Optional: Ensure text doesn't overflow the popup */
+}
+/*
+#popup:hover {
+    transform: rotateX(0deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+*/
+/* Pointer styling */
+#pointer {
+    position: absolute;
+    top: calc(50vh - 16vw - 15px); /* Adjust to position the pointer accurately */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid var(--pointer-color);
+    z-index: 10;
+}
+
+/* Confetti styling */
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    display: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--confetti-color); /* Use CSS variable */
+    animation: fall 3s linear infinite;
+    animation-duration: calc(2s + 2 * random()); /* Random speed */
+}
+
+/* Confetti falling animation */
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}

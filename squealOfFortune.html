@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Wheel of Fortune</title>
+    <link rel="stylesheet" href="css\squealOfFortune.css">
+</head>
+<body>
+    <div class="background-image">
+        <div class="wheel-container">
+            <canvas id="wheel" width="800" height="800"></canvas>
+            <!-- <div id="pointer" class="pointer"></div> -->
+            <button id="spin-btn">Spin the Wheel!</button>
+        </div>
+<!--
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <img id="popup-img" src="" alt="Selected Image">
+                <p id="popup-text"></p>
+                <button id="close-popup">Close</button>
+            </div>
+        </div>
+    -->
+
+    <div id="popup">
+        <span id="close-popup">✖</span> <!-- "X" close button on top of the image -->
+        <img id="popup-img" src="" alt="Selected Image">
+        <div id="spotify-container"></div> <!-- Container for Spotify iframe -->
+        <p id="popup-text"></p>
+    </div>    
+
+        <div id="confetti"></div>
+    </div>
+
+    <script src="js\squealOfFortune.js"></script>
+</body>
+</html>
