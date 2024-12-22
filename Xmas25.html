@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Game</title>
+    <link rel="stylesheet" href="css\Xmas25.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <h1>Välkommen till Julspelet!</h1>
+            <label for="player-name">Välj ditt namn:</label>
+            <select id="player-name">
+                <option value="easy">Alice</option>
+                <option value="medium">Alma</option>
+                <option value="medium">Ester</option>
+                <option value="hard">Lovisa</option>
+                <option value="hard">Malte</option>
+                <option value="hard">Saga</option>
+            </select>
+            <button id="start-button">Starta spelet</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" style="display: none;">
+            <div id="score-display">Poäng: 0</div>
+            <div id="timer-display">Tid: 0</div>
+            <canvas id="game-canvas" width="300" height="400"></canvas>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victory-screen" style="display: none;">
+            <h1>Grattis!</h1>
+            <p>Den 26e spelar vi laserdome i Helsingborg.<br>
+            Klockan 12 börjar det och kom i tid, annars får du vara måltavla.</p>
+            <img src="https://helsingborg.laserdome.se/wp-content/uploads/2024/12/240321laserdome_lisawikstrand_114-min-1024x683.jpg" alt="Laserdome Helsingborg" style="max-width: 100%; height: auto; margin-top: 20px;">
+            <button id="victory-restart-button">Spela igen</button>
+        </div>
+
+        <!-- Try Again Screen -->
+        <div id="try-again-screen" style="display: none;">
+            <h1>Försök igen!</h1>
+            <p>Tyvärr nådde du inte poänggränsen i tid.<br>Vill du försöka igen?</p>
+            <button id="try-again-restart-button">Försök igen</button>
+        </div>
+    </div>
+    <script src="js\Xmas25.js"></script>
+</body>
+</html>
