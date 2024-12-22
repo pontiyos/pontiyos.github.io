@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Game</title>
+    <title>Ho-Ho-Ho</title>
     <link rel="stylesheet" href="css\Xmas25.css">
 </head>
 <body>
@@ -20,7 +20,17 @@
                 <option value="hard">Malte</option>
                 <option value="hard">Saga</option>
             </select>
-            <button id="start-button">Starta spelet</button>
+            <button id="start-button">Starta</button>
+        </div>
+
+        <!-- Info Screen -->
+        <div id="info-screen" style="display: none;">
+            <h1>Spelets Regler</h1>
+            <p>Du behöver uppnå <span id="required-points"></span> poäng.</p>
+            <p>Du har <span id="time-limit"></span> sekunder.</p>
+            <p>Måltavlor ger 100 poäng.</p>
+            <p>Hundar tar bort 50 poäng.</p>
+            <button id="info-start-button">Starta Spelet</button>
         </div>
 
         <!-- Game Screen -->

@@ -3,7 +3,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #003366, #66ccff);
+    background: url('https://coreldrawdesign.com/resources/previews/preview-short-santa-claus-christmas-vector-illustration-art-1703168308.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -13,87 +14,94 @@ body {
 }
 
 #game-container {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 /* Start Screen */
-#start-screen {
+#start-screen, #victory-screen, #try-again-screen, #info-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 0, 0, 0.8); /* Red overlay for the start screen */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     max-width: 90%;
     text-align: center;
 }
 
-#start-screen h1 {
+#start-screen h1, #victory-screen h1, #try-again-screen h1, #info-screen h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px #000;
 }
 
-#start-screen label {
+#start-screen label, #victory-screen p, #try-again-screen p, #info-screen p {
     font-size: 18px;
 }
 
-#start-screen select {
+#start-screen select, #victory-restart-button, #try-again-restart-button, #start-button, #info-start-button {
     padding: 10px;
     font-size: 16px;
     margin-top: 10px;
     border-radius: 5px;
     border: none;
-}
-
-#start-screen button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: #006400; /* Dark green */
+    color: #fff;
     cursor: pointer;
+    box-shadow: inset 0 0 5px #fff;
 }
 
-#start-screen button:hover {
-    background-color: #ff4500;
+#start-screen select:hover, #victory-restart-button:hover, #try-again-restart-button:hover, #start-button:hover, #info-start-button:hover {
+    background-color: #00a000; /* Lighter green for hover */
+    box-shadow: 0 0 10px #fff;
 }
 
 /* Game Screen */
 #game-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
     position: relative;
+    width: 80%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#score-display, #timer-display {
+    position: absolute;
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 #score-display {
-    position: absolute;
-    top: 10px;
     left: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 #timer-display {
-    position: absolute;
-    top: 10px;
     right: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 #game-canvas {
     display: block;
     margin: 0 auto;
-    background: #000;
+    background: rgba(0, 0, 0, 0.7);
     border: 2px solid #fff;
     border-radius: 5px;
 }
@@ -105,7 +113,7 @@ body {
     transform: translateX(-50%);
     padding: 10px 20px;
     font-size: 18px;
-    background-color: #ff6600;
+    background-color: #006400; /* Dark green */
     color: white;
     border-radius: 5px;
     border: none;
@@ -113,89 +121,6 @@ body {
 }
 
 #restart-button:hover {
-    background-color: #ff4500;
-}
-
-/* Victory Screen */
-#victory-screen {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#victory-screen h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-#victory-screen p {
-    text-align: center;
-    font-size: 18px;
-    margin: 0 20px;
-}
-
-#victory-screen img {
-    margin-top: 20px;
-    max-width: 90%;
-    height: auto;
-}
-
-#victory-screen button {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ff6600;
-    border-radius: 5px;
-    color: white;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-/* Try Again Screen */
-#try-again-screen {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#try-again-screen h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-#try-again-screen p {
-    text-align: center;
-    font-size: 18px;
-    margin: 0 20px;
-}
-
-#try-again-screen button {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ff6600;
-    border-radius: 5px;
-    color: white;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-#try-again-screen button:hover {
-    background-color: #ff4500;
+    background-color: #00a000; /* Lighter green for hover */
+    box-shadow: 0 0 10px #fff;
 }

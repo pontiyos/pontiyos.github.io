@@ -5,12 +5,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameScreen = document.getElementById('game-screen');
     const victoryScreen = document.getElementById('victory-screen');
     const tryAgainScreen = document.getElementById('try-again-screen');
+    const infoScreen = document.getElementById('info-screen');
+    const infoStartButton = document.getElementById('info-start-button');
+    const requiredPoints = document.getElementById('required-points');
+    const timeLimit = document.getElementById('time-limit');
     const scoreDisplay = document.getElementById('score-display');
     const timerDisplay = document.getElementById('timer-display');
     const gameCanvas = document.getElementById('game-canvas');
     const victoryRestartButton = document.getElementById('victory-restart-button');
     const tryAgainRestartButton = document.getElementById('try-again-restart-button');
     const ctx = gameCanvas.getContext('2d');
+
+    // Background music setup with alternating tracks
+    const musicTracks = [
+        'Audio\\Christmas Chaos (Jingle Till You Drop)_M.mp3',
+        'Audio\\More Christmas (Till It Breaks)_2.mp3'
+    ];
+    let backgroundMusic = new Audio(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = 0.5;
+
+    function playRandomMusic() {
+        backgroundMusic.pause();
+        backgroundMusic = new Audio(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.5;
+        backgroundMusic.play();
+    }
 
     let score = 0;
     let targets = [];
@@ -24,19 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
         hard: { points: 1500, time: 10 },
     };
 
-    let targetImages = [
-        "https://img.joomcdn.net/afc5cf5439622100ffebe0d0b7ad7d816ef8cb77_original.jpeg",
-         "https://m.media-amazon.com/images/I/71CNCfmeQ5L._AC_SL1500_.jpg",
-          "https://target.scene7.com/is/image/Target/GUEST_9e262c98-d293-4864-9942-79ccb67099fa?wid=488&hei=488&fmt=pjpeg"
-        ]; 
-        
+    const positiveTargets = [
+        { image: "img\\Xmas\\Target_1.webp", points: 100 },
+        { image: "img\\Xmas\\Target_2.webp", points: 100 },
+        { image: "img\\Xmas\\Target_3.webp", points: 100 },
+    ];
+
+    const negativeTargets = [
+        { image: "img\\Xmas\\Nope_1.png", points: -50 },
+        { image: "img\\Xmas\\Nope_2.webp", points: -50 },
+    ];
+
     class Target {
-        constructor(x, y, size, image) {
+        constructor(x, y, size, image, points) {
             this.x = x;
             this.y = y;
             this.size = size;
             this.image = new Image();
             this.image.src = image;
+            this.points = points; // Positive or negative points
         }
 
         draw() {
@@ -59,6 +86,21 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please select your name to start the game.');
             return;
         }
+        playRandomMusic(); // Play random track when game begins
+        showInfoScreen(selectedDifficulty);
+    });
+
+    function showInfoScreen(difficulty) {
+        const settings = difficultySettings[difficulty];
+        requiredPoints.textContent = settings.points;
+        timeLimit.textContent = settings.time;
+        startScreen.style.display = "none";
+        infoScreen.style.display = "flex";
+    }
+
+    infoStartButton.addEventListener('click', () => {
+        const selectedDifficulty = playerNameDropdown.value;
+        infoScreen.style.display = "none";
         startGame(selectedDifficulty);
     });
 
@@ -69,10 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
         targets = [];
         gameCanvas.width = window.innerWidth * 0.8;
         gameCanvas.height = window.innerHeight * 0.6;
-        startScreen.style.display = 'none';
-        gameScreen.style.display = 'block';
-        victoryScreen.style.display = 'none';
-        tryAgainScreen.style.display = 'none';
+        gameScreen.style.display = "block";
+        victoryScreen.style.display = "none";
+        tryAgainScreen.style.display = "none";
         updateScore();
         updateTimer();
         spawnTargets(difficulty);
@@ -92,12 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const x = Math.random() * (gameCanvas.width - 50);
             const y = Math.random() * (gameCanvas.height - 50);
-            const size = 50;
-            const image = targetImages[Math.floor(Math.random() * targetImages.length)];
-            const target = new Target(x, y, size, image);
+            const size = 70;
 
+            // Randomly choose between positive and negative targets
+            const isNegative = Math.random() < 0.2; // 20% chance for negative targets
+            const targetData = isNegative
+                ? negativeTargets[Math.floor(Math.random() * negativeTargets.length)]
+                : positiveTargets[Math.floor(Math.random() * positiveTargets.length)];
+
+            const target = new Target(x, y, size, targetData.image, targetData.points);
             targets.push(target);
-            checkVictory();
         }, spawnRate);
     }
 
@@ -125,12 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    function checkVictory() {
-        if (score >= difficultySettings[playerNameDropdown.value].points) {
-            endGame();
-        }
-    }
-
     function gameLoop() {
         if (!isPlaying) return;
         ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -148,13 +187,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         targets.forEach((target, index) => {
             if (target.isHit(clickX, clickY)) {
-                score += 100;
+                score += target.points; // Add or deduct points
                 updateScore();
                 targets.splice(index, 1);
                 checkVictory();
             }
         });
     });
+
+    function checkVictory() {
+        if (score >= difficultySettings[playerNameDropdown.value].points) {
+            endGame();
+        }
+    }
 
     function endGame() {
         isPlaying = false;
@@ -182,5 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameScreen.style.display = 'none';
         victoryScreen.style.display = 'none';
         tryAgainScreen.style.display = 'none';
+        infoScreen.style.display = 'none';
+        playRandomMusic(); // Play new random track on restart
     }
 });
